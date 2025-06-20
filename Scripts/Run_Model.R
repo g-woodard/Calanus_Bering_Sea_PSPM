@@ -1035,18 +1035,7 @@ mj_adult_juvenile_ratio = data.frame(cbind(adult_biomass/juvenile_biomass, mj))
 colnames(mj_adult_juvenile_ratio) = c("Ratio","mj")
 dev.off()
 
-a <- ggplot(data = mj_df, aes(y = Biomass, x = mj))  +
-  facet_wrap(~Stage) +
-  geom_line() +
-  scale_x_continuous(limits = c(40,265.5))+
-  labs(x = NULL, y = expression(paste("Density (mg/", m^{3} ,")"))) +
-  theme_classic() +
-  theme(plot.margin = margin(0.2,0.2,0.2,0.75, "cm"),
-        axis.text = element_text(size = 12),
-        axis.title = element_text(size = 13),
-        strip.text.x = element_text(size = 12)) 
-
-b <- ggplot(data = mj_adult_juvenile_ratio, aes( y = Ratio, x = mj))  +
+a <- ggplot(data = mj_adult_juvenile_ratio, aes( y = Ratio, x = mj))  +
   geom_line() +
   scale_x_continuous(limits = c(40,265.5))+
   scale_y_continuous(limits = c(0.15,0.3)) + 
@@ -1057,7 +1046,18 @@ b <- ggplot(data = mj_adult_juvenile_ratio, aes( y = Ratio, x = mj))  +
         axis.title = element_text(size = 13)) 
  
 
-size_at_maturity_vs_biomass_and_Stage_ratio_graph <- ggarrange(a,b, ncol = 1, labels = c("B", "C"))
+b <- ggplot(data = mj_df, aes(y = Biomass, x = mj))  +
+  facet_wrap(~Stage) +
+  geom_line() +
+  scale_x_continuous(limits = c(40,265.5))+
+  labs(x = NULL, y = expression(paste("Density (mg/", m^{3} ,")"))) +
+  theme_classic() +
+  theme(plot.margin = margin(0.2,0.2,0.2,0.75, "cm"),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 13),
+        strip.text.x = element_text(size = 12)) 
+
+size_at_maturity_vs_biomass_and_Stage_ratio_graph <- ggarrange(a,b, ncol = 1, labels = c("B", "C"), heights = c(7,4))
 size_at_maturity_vs_biomass_and_Stage_ratio_graph
 
 #ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_and_Stage_ratio_graph.png"), plot = size_at_maturity_vs_biomass_and_Stage_ratio_graph, dpi = 300, height = 7, width = 7, units = "in")
@@ -1065,11 +1065,11 @@ size_at_maturity_vs_biomass_and_Stage_ratio_graph
 min(mj_adult_juvenile_ratio$Ratio)
 
 #Run this script to generate extinction_vs_size graph to combine with other graphs below
-source(paste0(root,"Scripts/mj_analysis.R"))
+source(paste0(root,"/Scripts/00_mj_analysis.R"))
 
 stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph, ncol = 2, rel_widths = c(4,5))
 
 stage_ratio_biomass_extinction_temp
 
-ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_Stage_ratio_and_extinction_graph.png"), plot = stage_ratio_biomass_extinction_temp, dpi = 300, height = 5, width = 7, units = "in")
+ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_Stage_ratio_and_extinction_graph.png"), plot = stage_ratio_biomass_extinction_temp, dpi = 300, height = 6, width = 7, units = "in")
 
