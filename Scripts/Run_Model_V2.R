@@ -4,10 +4,13 @@ library(ggplot2)
 library(ggpubr)
 library(cowplot)
 library(here)
+library(extrafont)
+
+set_null_device("png")
 
 root <- here()
 
-DefaultParameters <- c(Delta = 0.0014, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
                        Rmax = 2000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
@@ -21,68 +24,45 @@ DefaultParameters <- c(Delta = 0.0014, #turnover rate is 1 divided by the per ca
                        E_I = .46, #.46 for C. glacialis (Maps et al. 2012).  Ingestion Activation Energy, see if I can find another one for activity or attack rates
                        #Average of .6 Savage et al. 2004, as cited in (Crossier 1926; Raven and Geider 1988; Vetter 1995; Gillooly et al. 2001)
                        E_Delta = 0.5, #average activation energy of phytoplankton growth from Barton and Yvon-Durocher (2019) 
-                       #Im = 29.89,
-                       Im = 11.26, #Im ended up not being used in the final ingestion formulation, but left here to prevent breaking numeric indices
-                       #mean of just calanus at 15 C is 22.48333.  Mean of all species at 15 C is 17.74286
-                       #Im = 17.74286,
-                       t0_Im = 285.65, #average of Saiz Calbet data restricted to 10-15 C
                        
-                       #286.803, #mean temp of saiz and calbet dataframe when restricted to experiments between 10 and 15 degrees C
-                       cI = 0, #Jan assumes a value of 0 in Roach model 
-                       cM = 0.0,# Jan tests the Roach model with values of -.02, 0, and .02 
-                       Lambda1 = 2, #(Petersen, 1986)
-                       Lamda2 = 3.94, #(Petersen, 1986)
+                       
                        k = 8.617e-5, #boltzmann constant
-                       alpha = 0.75, #guess
+                       alpha = 0.75, #(Hjelm and Persson 2001)
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
-                       sigma = 0.7 , #0.6 (Kiørboe, 2008.) Converts ingested energy to biomass
-                       #0.66 works well
-                       Mopt = 87, #exp(-3.18)*exp(.73*12), #???????????
+                       sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       gamma1 = exp(-3.211e-06), #from Saiz and Calbet max ingestion data at 15 C
-                       gamma2 = 9.683e-03,
-                       gamma3 = 9.894e-01,
-                       t0_gamma = 288.15,
+                       Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       theta1 = exp(-3.6374366),
-                       theta2 = 0.2492352,
-                       theta3 = 0.8211947,
-                       t0_theta = 286.953, #mean of Saiz and Calbet ingestion data when restricted to specimens at between 10 and 15 C
-                       
-                       epsi1 = exp(0.83445), #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
-                       epsi2 = 0.70310 , #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
+                       epsi1 = 0.9827528, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.006059, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi3 = 0.996373, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
                        t0_epsi = 288.15,
                        
-                       epsilon1 = exp(-8.68361),
-                       epsilon2 = 0.35064, #from Saiz and Calbet max ingestion data at 15 C
-                       epsilon3 = 0.88576,
-                       epsilon4 = 0.01603,
-                       t0_epsilon = 288.15,
+                       #Kiorbe, Mohlenberg and Nicolajsen (2012) maximum rate equal to 85 % body C · d−1 at 15 °C
                        
-                       omega1 = 3.6577,
-                       omega2 = 0.3307,
-                       t0_omega = 286.953, #mean of Saiz and Calbet ingestion data when restricted to specimens at between 10 and 15 C
-                       
-                       phi1 = 1.336596, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C.  Dry weight
-                       phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  Might need to change my reference temp?
+                       phi1 = 1.3365966, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C.  Dry weight
+                       phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  
                        t0_phi = 288.15,
                        
-                       rho1 = exp(2.45033), #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
+                       rho1 = 0.02310296, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
                        rho2 = 0.75816, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
                        t0_rho = 275.15,
                        
                        mh = .75, # .75 ug (micrograms) (Petersen, 1986) -graph pg 68
                        mj = exp(-3.18)*exp(.73*12),   # ug (micrograms) (Petersen, 1986) pg 66
                        
-                       t0_Delta = 281.15 #8 degrees celsius from Maranon et al. at an intermediate nutrient level had turnover rate of about 1 day
+                       t0_Delta = 281.15, #8 degrees celsius from Maranon et al. at an intermediate nutrient level had turnover rate of about 1 day
                        #Turnover_Time = 2.19907e-7 #converted from ms to days from Falkowski et al 1981
                        
                        #z = 0.002694034 #juvenile to adult ratio 
+                       cI = 0, #Jan assumes a value of 0 in Roach model 
+                       cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
+                       
 )
 
 library(lubridate)
 
-Bering_Calanus_Data = read.csv(here::here("Data/Calanus_BSMS.csv"))
+Bering_Calanus_Data = read.csv(paste0(root,"/Data/Calanus_BSMS.csv"))
 
 #So zooplankton combined includes years 1993 to 2018
 sort(unique(Bering_Calanus_Data$YEAR))
@@ -123,7 +103,7 @@ p1 <- ggplot(all_calanus_samples_within_month) +
   geom_point(aes(y = count, x = Month)) + 
   labs(y ="Number of Samples") + 
   theme_classic()+
-  theme(text = element_text(size = 14))
+  theme(text = element_text(family = "Times New Roman", size = 15))
 
 p1
 
@@ -133,8 +113,11 @@ p2 <- ggplot(all_calanus) +
   labs(y =expression(paste("Ln(Density) (mg / ", m^{3} ,")")), x = "Month") + 
   #labs(x = "Month", y = NULL) +
   theme_classic() +
-  theme(axis.text = element_text(size = 11),
-        plot.margin = margin(0.2,0.5,0.2,1, "cm")) +
+  theme(text = element_text(family = "Times New Roman"),
+        plot.margin = margin(0.2,0.5,0.2,1, "cm"),
+        strip.text.x = element_text(size = 13),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14)) +
   scale_y_continuous(position = "right")
 
 p2
@@ -155,8 +138,8 @@ p3_adult <- ggplot(all_calanus_spring_summer_adults) +
   labs(y = expression(paste("Ln(Density) (mg / ", m^{3} ,")")), x = NULL, title = "Adult Density") + 
   scale_x_date(date_labels = "%Y", ) +
   theme_classic()+
-  theme(text = element_text(size = 14))+
-  theme(plot.margin = margin(0.2,1,0.2,1, "cm"), plot.title = element_text(hjust = 0.5))
+  theme(text = element_text(family = "Times New Roman", size = 15),
+        plot.margin = margin(0.2,1,0.2,1, "cm"), plot.title = element_text(hjust = 0.5))
 
 p3_adult
 
@@ -168,8 +151,8 @@ p3_juvenile <- ggplot(all_calanus_spring_summer_juveniles) +
   labs(y = expression(paste("Ln(Density) (mg / ", m^{3} ,")")), x = NULL, title = "Juvenile Density") + 
   scale_x_date(date_labels = "%Y", ) +
   theme_classic()+
-  theme(text = element_text(size = 14))+
-  theme(plot.margin = margin(0.2,1,0.2,1, "cm"), plot.title = element_text(hjust = 0.5))
+  theme(text = element_text(family = "Times New Roman", size = 12), 
+        plot.margin = margin(0.2,1,0.2,1, "cm"), plot.title = element_text(hjust = 0.5))
 
 
 p3_juvenile
@@ -182,11 +165,15 @@ p3_all_stages <- ggplot(all_calanus_spring_summer) +
   labs(y = expression(paste("Ln(Density) (mg / ", m^{3} ,")")), x = NULL) + 
   scale_x_date(date_labels = "%Y", ) +
   theme_classic()+
-  theme(axis.text.x = element_text(size = 11, angle = -75, vjust = 0.25),
-        axis.text.y = element_text(size = 11),
+  theme(axis.text.x = element_text(size = 12, angle = -75, vjust = 0.25),
+        axis.text.y = element_text(size = 12),
         )+
-  theme(plot.margin = margin(0.2,0,0.2,0.5, "cm"), plot.title = element_text(hjust = 0.5),
-        strip.text.x = element_text(size = 10))
+  theme(text = element_text(family = "Times New Roman"),
+        plot.margin = margin(0.2,0,0.2,0.5, "cm"), plot.title = element_text(hjust = 0.5),
+        strip.text.x = element_text(size = 13),
+        strip.text.y = element_text(size = 13),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 14))
 
 p3_all_stages
 
@@ -202,36 +189,12 @@ p2_boxplot <- ggplot(all_calanus) +
   facet_wrap(~Stage) + 
   geom_boxplot(aes(y = log(mean_DW_mg_m3), x = Month)) + 
   #labs(y = expression(paste("Ln(Density) (mg / ", m^{3} ,")")), x = "Month") + 
-  labs(x = "Month", y = expression(paste("Ln(Density) (mg / ", m^{3} ,")"))) +
+  labs(x = "Month", y = expression(paste("Ln(Density) (mg /  ", m^{3} ,")"))) +
   theme_classic()+
-  theme(text = element_text(size = 14))
+  theme(text = element_text(family = "Times New Roman", size = 15))
 
 p2_boxplot
 
-
-plots <- list(p3_adult + labs(y = NULL),p3_juvenile + labs(y = NULL))
-grobs <- lapply(plots, as_grob)
-plot_widths <- lapply(grobs, function(x) {x$widths})
-# Aligning the left margins of all plots
-aligned_widths <- align_margin(plot_widths, "first")
-# Aligning the right margins of all plots as well
-aligned_widths <- align_margin(aligned_widths, "last")
-# Setting the dimensions of plots to the aligned dimensions
-for (i in seq_along(plots)) {
-  grobs[[i]]$widths <- aligned_widths[[i]]
-}
-
-Figure_1_alt <- plot_grid(plotlist = grobs, ncol = 1)
-Figure_1_alt <- annotate_figure(Figure_1_alt,   left = text_grob(expression(paste("Ln(Density) (mg / ", m^{3} ,")")),rot = 90, vjust = 1))
-Figure_1_alt
-
-Figure_1 <- ggarrange(p3_adult + labs(y = NULL),p3_juvenile+labs(y = NULL), nrow = 2, labels = c("A","B"))
-
-Figure_1
-
-Figure_1 <- annotate_figure(Figure_1,
-                left = text_grob(expression(paste("Ln(Density) (mg / ", m^{3} ,")")),rot = 90, vjust = 1), bottom = text_grob("Year") )
-Figure_1
 
 spring_Calanus = Bering_Calanus_Data[which(Bering_Calanus_Data[,"MONTH"] >=3 & Bering_Calanus_Data[,"MONTH"] < 6),]
 summer_Calanus = Bering_Calanus_Data[which(Bering_Calanus_Data[,"MONTH"] >=6 & Bering_Calanus_Data[,"MONTH"] < 9),]
@@ -314,6 +277,9 @@ Spring = as.numeric(c(Spring_Mean_Juvenile_Biomass,
 Summer = as.numeric(c(Summer_Mean_Juvenile_Biomass,
                       Summer_Mean_Adult_Biomass))
 
+min(Summer, na.rm = TRUE)
+max(Summer, na.rm = TRUE)
+
 Stage = as.character(c(rep("Juvenile", length(year_sequence)),
                        rep("Adult", length(year_sequence))))
 
@@ -346,10 +312,6 @@ DF2[,5] = as.numeric(DF2[,5])
 DF3 = na.omit(DF2)
 DF3$Temperature = DF3$Temperature - 273.15
 
-ggplot(data = DF3, aes(x = Year, y = log(value), linetype = Stage))+
-  facet_wrap(~name)+
-  geom_line()
-
 Temp_DF_2 = Temp_DF
 Temp_DF_2$Temperature = Temp_DF_2$Temperature - 273.15
 
@@ -364,15 +326,19 @@ temp_graph <- ggplot(data = Temp_DF_2_graph, aes(x = fake_date, y = Temperature)
   geom_line(size = .75)+
   scale_x_date(date_labels = "%Y", limits = c(as.Date("1993-01-01"), as.Date("2018-01-01"))) +
   theme_classic()+
-  theme(axis.text.x = element_text(size = 11, angle = -75, vjust = 0.25),
-        axis.text.y = element_text(size = 11),
-        strip.background = element_blank(), strip.text.x = element_blank()) +
   labs(y = "Temperature (°C)", x = "Year") +
-  theme(plot.margin = margin(0.2,0,0.2,0.5, "cm"), plot.title = element_text(hjust = 0.5))
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text.x = element_text(size = 12, angle = -75, vjust = 0.25),
+        axis.text.y = element_text(size = 12),
+        strip.background = element_blank(), 
+        strip.text.x = element_blank(),
+        axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
+        plot.margin = margin(0.2,0,0.2,0.5, "cm")
+       )
 
 temp_graph
 
-Figure_1_alt
 #This code aligns the left margins of the graphs
 
 plots <- list(p3_all_stages, temp_graph)
@@ -388,17 +354,17 @@ for (i in seq_along(plots)) {
 }
 # Draw aligned plots
 
-temp_combined_with_biomass_graphs <- plot_grid(plotlist = grobs, ncol = 1, labels = c("A","B"), rel_heights = c(7,3))
+temp_combined_with_biomass_graphs <- plot_grid(plotlist = grobs, ncol = 1, labels = c("A","B"), rel_heights = c(7,3),  label_fontfamily = "Times", label_colour = "black")
 temp_combined_with_biomass_graphs
 
-monthly_biomass_graph <- plot_grid(p2, ncol = 1, labels = c("C"))
+monthly_biomass_graph <- plot_grid(p2, ncol = 1, labels = c("C"),  label_fontfamily = "Times", label_colour = "black")
 monthly_biomass_graph 
 
 #temp_combined_with_biomass_graphs <- plot_grid(plotlist = grobs, ncol = 1, labels = c("A","B"), rel_heights = c(7,3))
 
 temp_combined_with_yearly_and_monthly_biomass_graphs <- plot_grid(temp_combined_with_biomass_graphs, 
                                                                   monthly_biomass_graph,
-                                                                  ncol = 2, labels = NULL, rel_widths = c(6,3.25))
+                                                                  ncol = 2, labels = NULL, rel_widths = c(6,3.25),  label_fontfamily = "Times", label_colour = "black")
 
 temp_combined_with_yearly_and_monthly_biomass_graphs
 
@@ -408,10 +374,13 @@ Modified_Parameters_A_hat_.096 = DefaultParameters
 
 
 
-output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1, 1), 
+output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1,1), #startpoint is the parameter startpoint (in this case Rmax) and environmental (resource) start point
                                 stepsize = 1.25,
-                                parbnds = c(1, 1, 5000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                                #Vector indexes in C start at 0, so parbnds is varying the first parameter (Rmax) when we say to start it from parameter "1"
+                                parbnds = c(1, 1, 30000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                                 clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
+
+output1_1_A_hat_.096$curvepoints
 
 
 df = data.frame(R_max = output1_1_A_hat_.096$curvepoints[, 1],
@@ -444,12 +413,6 @@ Ingestion_DF = data.frame(
 Ingestion_DF2 = Ingestion_DF  %>%
   pivot_longer(c(Ingestion,Imax))
 
-ggplot(Ingestion_DF2, aes(x = Rmax, y = value, color = name))+
-  geom_line()+
-  #guides(linetype=guide_legend(title = "Â"))+
-  labs(x= "Rmax (µg/L)", y="Ingestion rate (µg / day)") +
-  theme_light()
-
 
 t1 = output1_1_non_trivial_.096$curvepoints
 
@@ -470,10 +433,6 @@ df2 <- data.frame(R_max = output1_1_non_trivial_.096$curvepoints[, 1],
 df2 <- df2 %>% 
   pivot_longer(c(R, J, A))
 
-ggplot(df2, aes(R_max, value, color = name)) + 
-  geom_line()+ 
-  theme_light()
-
 output1_1_non_trivial_varying_temperature_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                                           biftype = "EQ", startpoint = c(273.15, output1_1_non_trivial_.096$curvepoints[start_.096,2], 
                                                                                          output1_1_non_trivial_.096$curvepoints[start_.096,3]), 
@@ -485,7 +444,7 @@ output1_1_non_trivial_varying_mj_.096 <-PSPMequi(modelname = paste0(root,"/Scrip
                                                  biftype = "EQ", startpoint = c(265.0716, output1_1_non_trivial_varying_temperature_.096$bifpoints[2], output1_1_non_trivial_varying_temperature_.096$bifpoints[3] 
                                                  ), 
                                                  stepsize = -.1,
-                                                 parbnds = c(45, 0, 265.0716), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
+                                                 parbnds = c(24, 0, 265.0716), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
                                                  clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 Total_Population_A_Hat = output1_1_non_trivial_varying_temperature_.096$curvepoints[, 5]+output1_1_non_trivial_varying_temperature_.096$curvepoints[, 6]
@@ -512,25 +471,38 @@ k = 8.617e-5
 
 Turnover = exp(E_Delta*(Temp-t0_Delta)/((k)*Temp*t0_Delta))*Delta*output1_1_non_trivial_varying_temperature_.096$curvepoints[,2]
 per_capita_turnover = exp(E_Delta*(Temp-t0_Delta)/((k)*Temp*t0_Delta))*Delta
-plot(per_capita_turnover~Temp)
-plot(Turnover~Temp)
+
 
 Mortality_DF = data.frame(cbind(Temp_Imax, mortality))
 colnames(Mortality_DF) = c("Temperature", "Mortality")
 Mortality_DF_per_capita = data.frame(cbind(Temp_Imax, per_capita_mortality))
 colnames(Mortality_DF_per_capita) = c("Temperature", "Mortality")
 
+Mortality_DF_Both = Mortality_DF %>%
+  left_join(Mortality_DF_per_capita, by = "Temperature")
+
+colnames(Mortality_DF_Both) <- c("Temperature", "Population", "Per Capita")
+
+Mortality_DF_Both <- Mortality_DF_Both %>%
+  pivot_longer(cols = c("Population","Per Capita"),
+               names_to = "Rate") %>%
+  mutate(Rate = as.factor(Rate)) %>%
+  data.frame
+
 Turnover_DF = data.frame(cbind(Temp_Imax, Turnover))
 colnames(Turnover_DF) = c("Temperature", "Turnover")
 Turnover_DF_per_capita = data.frame(cbind(Temp_Imax, per_capita_turnover))
 colnames(Turnover_DF_per_capita) = c("Temperature", "Turnover")
 
-I_DF = data.frame(cbind(I, I_max, Temp_Imax))
-colnames(I_DF) = c("I","Imax","Temperature")
+Turnover_DF_Both = Turnover_DF %>%
+  left_join(Turnover_DF_per_capita, by = "Temperature")
+colnames(Turnover_DF_Both) <- c("Temperature", "Population", "Per Capita")
 
-I_DF <- I_DF %>% 
-  pivot_longer(c(I, Imax))
-colnames(I_DF) = c("Temperature","Measurement", "value")
+Turnover_DF_Both <- Turnover_DF_Both %>%
+  pivot_longer(cols = c("Population","Per Capita"),
+               names_to = "Rate") %>%
+  mutate(Rate = as.factor(Rate)) %>%
+  data.frame
 
 
 M_DF = data.frame(cbind(Temp_Imax,Metabolism))
@@ -539,102 +511,151 @@ colnames(M_DF) = c("Temperature","Metabolism")
 per_capita_M_DF = data.frame(cbind(Temp_Imax,per_capita_Metabolism))
 colnames(per_capita_M_DF) = c("Temperature","Metabolism")
 
+M_DF_Both = M_DF %>%
+  left_join(per_capita_M_DF, by = "Temperature")
+colnames(M_DF_Both) <- c("Temperature", "Population", "Per Capita")
 
-per_capita_metabolism_graph = ggplot()+
-  geom_line(data = per_capita_M_DF, aes(x = Temperature, y = Metabolism) )+
+M_DF_Both <- M_DF_Both %>%
+  pivot_longer(cols = c("Population","Per Capita"),
+               names_to = "Rate") %>%
+  mutate(Rate = as.factor(Rate)) %>%
+  data.frame() %>%
+  na.omit()
+
+
+both_metabolism_graph = ggplot(data = M_DF_Both)+
+  geom_line(aes(x=Temperature, y=value, linetype = Rate, group = Rate)) +
   labs(x= NULL, y="µg O2 / day", title = "Metabolism") +
+  scale_linetype_manual(values = c(1,2)) +
   theme_classic() +
-  theme(axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11),
+        legend.position = "none")
 
+I_only <- data.frame(cbind(Temp_Imax, I)) %>%
+  mutate(Rate = "Population")
+colnames(I_only) <- c("Temperature", "Value" , "Rate")
 
-total_metabolism_graph = ggplot()+
-  geom_line(data= M_DF, aes(x = Temperature, y = (Metabolism)) )+
-  labs(x= NULL, y="µg O2 / day", title = "Metabolism") +
+I_only_per_capita <- data.frame(cbind(Temp_Imax, per_capita_I)) %>%
+  mutate(Rate = "Per Capita")
+colnames(I_only_per_capita) <- c("Temperature", "Value" , "Rate")
+
+Imax_only <- data.frame(cbind(Temp_Imax, I_max))%>%
+  mutate(Rate = "Population")
+colnames(Imax_only) <- c("Temperature", "Value" , "Rate")
+
+Imax_only_per_capita <- data.frame(cbind(Temp_Imax, per_capita_Imax)) %>%
+  mutate(Rate = "Per Capita")
+colnames(Imax_only_per_capita) <- c("Temperature", "Value" , "Rate")
+
+Ingestion_Only <- rbind(I_only, I_only_per_capita)
+
+Ingestion_max_only <- rbind(Imax_only, Imax_only_per_capita)
+
+Ingestion_graph_both <- ggplot()+
+  geom_line(data = Ingestion_Only, aes(x = Temperature, y = Value, linetype = Rate) )+
+  labs(x= NULL, y=NULL, title = "Ingestion") +
+  scale_linetype_manual(values = c(1,2)) +
+  scale_y_continuous(breaks = seq(0.0,1,.25)) +
   theme_classic() +
-  theme(axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
+  theme(text = element_text(family = "Times New Roman"),
+        legend.position="none", 
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11))
 
+Ingestion_graph_both
 
-per_capita_I_DF = data.frame(cbind(Temp_Imax,per_capita_I,per_capita_Imax))
-
-per_capita_I_DF <- per_capita_I_DF %>% 
-  pivot_longer(c(per_capita_I,per_capita_Imax))
-
-colnames(per_capita_I_DF) = c("Temperature","Measurement","Value")
-
-per_capita_ingestion_graph = ggplot()+
-  geom_line(data = per_capita_I_DF, aes(x = Temperature, y = Value, linetype = Measurement) )+
-  labs(x= NULL, y="µg / day", title = "Ingestion") +
-  scale_color_discrete(name = "Measurement", labels = c("Ingestion", "Maximum Ingestion")) +
+Maximum_Ingestion_graph_both <- ggplot()+
+  geom_line(data = Ingestion_max_only, aes(x = Temperature, y = Value, linetype = Rate) )+
+  labs(x= NULL, y=NULL, title = "Maximum\nIngestion") +
+  scale_linetype_manual(values = c(1,2)) +
   theme_classic() +
-  theme(legend.position="none", 
-      axis.text = element_text(size = 15),
-      axis.title.y = element_text(size = 15),
-      title = element_text(size = 15))
+  theme(text = element_text(family = "Times New Roman"),
+        legend.position="none", 
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11))
+
+Maximum_Ingestion_graph_both 
 
 
-total_ingestion_graph = ggplot()+
-  geom_line(data= I_DF, aes(x = Temperature, y = value, linetype = Measurement))+
-  labs(x= NULL, y="µg / day", title = "Ingestion") +
-  scale_color_discrete(name = "Measurement", labels = c("Ingestion", "Maximum Ingestion")) +
+both_mortality_graph = ggplot(data = Mortality_DF_Both)+
+  geom_line(aes(x=Temperature, y=value, linetype = Rate, group = Rate)) +
+  labs(x= NULL, y=NULL, title = "Mortality") +
+  scale_linetype_manual(values = c(1,2)) +
+  scale_y_continuous(breaks = seq(0,0.012, by = 0.002)) +
   theme_classic() +
-  theme(legend.position="none", 
-        axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
-        
-
-per_capita_mortality_graph = ggplot()+
-  geom_line(data = Mortality_DF_per_capita, aes(x = Temperature, y = Mortality) )+
-  labs(x= NULL, y="µg / day", title = "Mortality") +
-  theme_classic() +
-  theme(axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
-
-
-
-total_mortality_graph = ggplot()+
-  geom_line(data= Mortality_DF, aes(x = Temperature, y = Mortality))+
-  labs(x= NULL, y="µg /day", title = "Mortality") +
-  theme_classic() +
-  theme(axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11),
+        legend.position = "none")
 
 per_capita_turnover_graph = ggplot()+
   geom_line(data = Turnover_DF_per_capita, aes(x = Temperature, y = Turnover) )+
-  labs(x= NULL, y="µg /day", title = "Resource Turnover") +
+  labs(x= NULL, y=NULL, title = "Per Capita Resource Turnover") +
   theme_classic() +
-  scale_y_continuous(breaks = seq(0.005,0.015, 0.005)) +
-  theme(axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11))
+
+per_capita_turnover_graph 
 
 total_turnover_graph = ggplot()+
-  geom_line(data= Turnover_DF, aes(x = Temperature, y = Turnover))+
-  labs(x= NULL, y="µg /day", title = "Resource Turnover") +
+  geom_line(data= Turnover_DF, aes(x = Temperature, y = Turnover), linetype = 2)+
+  labs(x= NULL, y=NULL, title = "Population Resource Turnover") +
   theme_classic() +
-  theme(axis.text = element_text(size = 15),
-        axis.title.y = element_text(size = 15),
-        title = element_text(size = 15))
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11))
 
+both_turnover_graph = ggplot(data = Turnover_DF_Both)+
+  geom_line(aes(x=Temperature, y=value, linetype = Rate, group = Rate)) +
+  labs(x= NULL, y="µg / day", title = "Turnover") +
+  scale_linetype_manual(values = c(1,2)) +
+  theme_classic() +
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        title = element_text(size = 11),
+        legend.position = "none")
 
 #parameter_rates_graph <- ggarrange(ggarrange(per_capita_ingestion_graph, per_capita_metabolism_graph, per_capita_mortality_graph, per_capita_turnover_graph, ncol = 4, nrow = 1,align = "h", labels = c("A", "B", "C", "D")),
 #          ggarrange(total_ingestion_graph, total_metabolism_graph, total_mortality_graph, total_turnover_graph,ncol = 4, nrow = 1, align = "h", labels = c("E", "F","G","H")), nrow = 2)
 
-parameter_rates_graph <- ggarrange(per_capita_ingestion_graph, per_capita_metabolism_graph, per_capita_mortality_graph, per_capita_turnover_graph,
-                                   total_ingestion_graph, total_metabolism_graph, total_mortality_graph, total_turnover_graph,ncol = 4, nrow = 2, align = "v", labels = c("A", "B", "C", "D", "E", "F","G","H"),
-                                   font.label = list(size = 18, color = "black"))
+turnovergraphs <- ggarrange(per_capita_turnover_graph, total_turnover_graph, nrow = 1, font.label = list(size = 14, color = "black"))
 
-parameter_rates_graph <- annotate_figure(parameter_rates_graph,
-                bottom = text_grob("Temperature (°C)", size = 19),
-                left = text_grob("Rate", size = 19, rot = 90))
+turnovergraphs <- annotate_figure(turnovergraphs,
+                                  left = text_grob("µg / day", size = 12, rot = 90),
+                                  #top = text_grob("Resource Turnover", size = 13),
+                                  bottom = text_grob("Temperature (°C)", size = 12)#,left = text_grob("Rate", size = 19, rot = 90)
+)
 
-ggsave(paste0(root,"/figures/parameter_rates_graph.png"), plot = parameter_rates_graph, dpi = 400, height = 6, width = 13, units = "in")
+turnovergraphs
+
+
+parameter_rates_graph_alt <- ggarrange(Ingestion_graph_both, Maximum_Ingestion_graph_both, both_mortality_graph, both_metabolism_graph,  ncol = 4, 
+                                   font.label = list(size = 14, color = "black"))
+
+parameter_rates_graph_alt 
+
+
+parameter_rates_graph_alt <- annotate_figure(parameter_rates_graph_alt,
+                                         bottom = text_grob("Temperature (°C)", size = 12),
+                                         left = text_grob("µg / day", size = 12, rot = 90)
+)
+
+parameter_rates_graph_alt
+
+parameter_rates_graph_alt_combined <- ggarrange(parameter_rates_graph_alt, turnovergraphs, align = "v", nrow = 2, labels = c("A", "B"))
+parameter_rates_graph_alt_combined
+
+ggsave(paste0(root,"/figures/parameter_rates_graph_alt.png"), plot = parameter_rates_graph_alt_combined, dpi = 500, height = 4, width = 7, units = "in")
 
 
 Net_Production_A_hat_.096 = output1_1_non_trivial_varying_temperature_.096$curvepoints[,7] + output1_1_non_trivial_varying_temperature_.096$curvepoints[,8]
@@ -647,6 +668,7 @@ Net_Production_A_hat_.096_A = output1_1_non_trivial_varying_temperature_.096$cur
 
 Net_Production_vs_Temp_DF = data.frame(cbind(Net_Production_A_hat_.096, Temp_A_hat_.096) )
 
+max(Net_Production_A_hat_.096)
 which(Net_Production_A_hat_.096 == max(Net_Production_A_hat_.096))
 Temp_A_hat_.096[which(Net_Production_A_hat_.096 == max(Net_Production_A_hat_.096))]
 
@@ -657,7 +679,8 @@ ggplot(Net_Production_vs_Temp_DF, aes(x= Temperature, y = Net_Production))+
   #guides(linetype=guide_legend(title = "Â"))+
   labs(x= "Temperature (°C)", y = expression(paste("Net Production (mg / ", m^{3} ," / day)"))) +
   scale_x_continuous(breaks = round(seq(min(Net_Production_vs_Temp_DF$Temperature), max(Net_Production_vs_Temp_DF$Temperature), by = 2),0))+
-  theme_classic()
+  theme_classic() +
+  theme(text = element_text(family = "Times New Roman"))
 
 
 Temp_A_hat = Temp_A_hat_.096
@@ -701,11 +724,11 @@ labeller_A_J_R <- function(variable,value){
 population_trajectory_graph = ggplot(df3, aes(x = Temperature, y= value)) + 
   facet_wrap(~name, scale = "free", labeller = labeller_A_J_R)+
   theme_classic()+
-  theme(text = element_text(size = 14),
+  theme(text = element_text(family = "Times New Roman", size = 15),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         strip.background = element_blank(),
-        strip.text.x = element_text(size = 14)
+        strip.text.x = element_text(size = 15)
   )+
   geom_line() + labs(x= "Temperature (°C)", y= expression(paste("Density (mg / ", m^{3} ,")"))) +
   guides(color=guide_legend(title = "Population"))+
@@ -732,6 +755,7 @@ ggplot(df3.5, aes(x = Temperature, y= (value))) +
   facet_wrap(~name, scales = "free", labeller = labeller_A_J)+
   guides(color=guide_legend(title = "Population"))+
   theme_classic()+
+  theme(text = element_text(family = "Times New Roman")) +
   labs(x= "Temperature (°C)", y= expression(paste("Net Production (mg / ", m^{3} ," /day",")")) ) +
   scale_color_manual(labels=c(expression(paste("Adult (mg / ", m^{3} ," /day",")")), 
                               expression(paste("Juvenile (mg / ", m^{3} ," /day",")"))),
@@ -750,12 +774,13 @@ ggplot(df4, aes(x = R, y= value)) +
   guides(color=guide_legend(title = "Population"))+
   theme_classic()+
   scale_color_manual(labels=c('Adult (µ/L)', 'Juvenile (µ/L)', 'Resource (µg C/L)'),
-                     values = c("Black","Red","Blue"))
+                     values = c("Black","Red","Blue")) +
+  theme(text = element_text(family = "Times New Roman"))
 
-Total_Population_A_Hat = output1_1_non_trivial_varying_temperature_.096$curvepoints[, 5]+output1_1_non_trivial_varying_temperature_.096$curvepoints[, 6]
+Total_Population_A_Hat = output1_1_non_trivial_varying_temperature_.096$curvepoints[,5] + output1_1_non_trivial_varying_temperature_.096$curvepoints[, 6]
 
-#Divide by 10 for Net Production so units are on scale of 10s
-Net_Production_A_Hat = Net_Production_A_hat_.096/10
+#Divide by 100 so units for net production are 100 mg/m3/day
+Net_Production_A_Hat = Net_Production_A_hat_.096/100
 
 birth_rate_A_Hat = output1_1_non_trivial_varying_temperature_.096$curvepoints[, 3]
 
@@ -778,8 +803,10 @@ df6 <- data.frame(cbind(Temperature = Temperature_A_Hat,
                         
                         Net_Production = Net_Production_A_Hat,
                         
+                        #per capita birth rate
                         birth_rate = birth_rate_A_Hat/(Total_Population_A_Hat), 
                         
+                        #per capita net production
                         Net_Production = Net_Production_A_Hat/Total_Population_A_Hat))
 
 colnames(df6) = c("Temperature","birth_rate", "Net_Production", "birth_rate", "Net_Production")
@@ -797,18 +824,20 @@ fecundity_net_production_graph <- ggplot(df6, aes(y=(value), x = Temperature, co
   theme_classic()+
   labs(x = "Temperature (°C)", y ="Value") +
   guides(color=guide_legend(title = "Population"))+
-  
+ 
   scale_color_manual(labels=c(expression(paste("Birth Rate (Individuals / ", m^{3} ," / day)")), 
-                              expression(paste("Net Production (10 mg / ", m^{3} ," / day)"))),
+                              expression(paste("Net Production (100 mg / ", m^{3} ," / day)"))),
                      values = c("Black","Red"))+
-  theme(axis.text.x = element_text(size = 11),
-        axis.title.x = element_text(size = 13),
-        axis.text.y = element_text(size = 11),
-        axis.title.y = element_text(size = 13),
+ 
+   theme(text = element_text(family = "Times New Roman"),
+        axis.text.x = element_text(size = 13),
+        axis.title.x = element_text(size = 15),
+        axis.text.y = element_text(size = 13),
+        axis.title.y = element_text(size = 15),
         strip.text.x = element_text(size = 15, hjust = 0),
         panel.spacing = unit(2, "lines"),
         legend.title = element_blank(),
-        legend.text = element_text(size = 10),
+        legend.text = element_text(size = 12),
         legend.position = "bottom",
         strip.background = element_rect(color="white", fill="white", linetype="solid"))+
   scale_x_continuous(breaks = round(seq(min(df3$Temperature), max(df3$Temperature), by = 5),0))
@@ -828,11 +857,12 @@ ggplot(Adult_Juvenile_Ratio_df, aes(y=Adult_Juvenile_Ratio, x = R_A_hat)) +
   labs(x = expression(paste("Resource Density (mg / ", m^{3} ,")")), y ="Adult:Juvenile Biomass Ratio") +
   scale_color_manual(labels=c("0.04", "0.096", "1.3344"))+
   
-  theme(axis.text.x = element_text(size = 11),
-        axis.title.x = element_text(size = 13),
-        axis.text.y = element_text(size = 11),
-        axis.title.y = element_text(size = 13),
-        strip.text.x = element_text(size = 15, hjust = 0),
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 14),
+        axis.text.y = element_text(size = 12),
+        axis.title.y = element_text(size = 14),
+        strip.text.x = element_text(size = 16, hjust = 0),
         panel.spacing = unit(2, "lines"),
         strip.background = element_rect(color="white", fill="white", linetype="solid"))
 
@@ -848,11 +878,12 @@ Adult_juvenile_ratio_graph = ggplot(Adult_Juvenile_Ratio_df, aes(y=Adult_Juvenil
   labs(x = "Temperature (C°)", y ="Adult:Juvenile Biomass Ratio") +
   scale_x_continuous(breaks = round(seq(min(df3$Temperature), max(df3$Temperature), by = 2),0))+
   
-  theme(axis.text.x = element_text(size = 11),
-        axis.title.x = element_text(size = 13),
-        axis.text.y = element_text(size = 11),
-        axis.title.y = element_text(size = 13),
-        strip.text.x = element_text(size = 15, hjust = 0),
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 14),
+        axis.text.y = element_text(size = 12),
+        axis.title.y = element_text(size = 14),
+        strip.text.x = element_text(size = 16, hjust = 0),
         panel.spacing = unit(2, "lines"),
         strip.background = element_rect(color="white", fill="white", linetype="solid"))
 
@@ -899,6 +930,12 @@ DF3_Summer[,2] = as.character(DF3_Summer[,2])
 
 DF3_Summer = DF3_Summer[,c(1,2,4,5)]
 
+#calculate totals
+adult_plus_juveniles <- DF3_Summer %>%
+  group_by(Year) %>%
+  summarize(total = sum(value))
+
+
 for(i in 1:nrow(DF3_Summer))
 {
   if(DF3_Summer[i,"Stage"] == "Juvenile")
@@ -928,7 +965,7 @@ ggplot(data =   DF3, aes(x = Year, y = (value), linetype = Stage))+
   labs(y= "Density (µg/L)") +
   geom_line(size = 0.75)+
   theme_classic()+
-  theme(text = element_text(size = 14))
+  theme(text = element_text(family = "Times New Roman", size = 15))
 
 
 
@@ -938,7 +975,7 @@ ggplot(data =  DF_Summer_Observed_Predicted, aes(x = Year, y = (value), color = 
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         strip.background = element_blank(),
-        text = element_text(size = 12)
+        text = element_text(family = "Times New Roman", size = 15)
   )+
   geom_line()+
   guides(color=guide_legend(title = "Data Type"))+
@@ -984,12 +1021,13 @@ ggplot(data = DF_Summer_Observed_Predicted, aes(x = log(value), color = Data_Typ
   geom_density(alpha=.2)+
   theme_classic()+
   labs(x = expression(paste("Ln(Density) (mg / ", m^{3} ,")")), y ="Density") +
-  theme(panel.grid.major = element_blank(),
+  theme(text = element_text(family = "Times New Roman", size = 15), 
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         strip.background = element_blank(),
         legend.title=element_blank(),
-        axis.text = element_text(size = 12),
-        text = element_text(size = 14))
+        axis.text = element_text(size = 13),
+        )
 
 #Boxplot version of above figure
 
@@ -999,19 +1037,25 @@ obs_vs_pred_biomass <- ggplot(data = DF_Summer_Observed_Predicted) +
   labs(y = expression(paste("Ln(Density) (mg / ", m^{3} ,")"))) +
       theme_classic() + 
   scale_x_discrete(labels = c("Adult", "Juvenile")) +
-  theme(panel.grid.major = element_blank(),
+  theme(text = element_text(family = "Times New Roman"),
+        panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         strip.background = element_blank(),
         legend.title=element_blank(),
-        axis.text = element_text(size = 12),
-        text = element_text(size = 14))
+        axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(size = 14),
+        axis.text.y = element_text(size = 12),
+        axis.title.y = element_text(size = 14),
+        strip.text.x = element_text(size = 16, hjust = 0),
+        legend.text = element_text(size = 12)
+        )
 
 
 ggsave(paste0(root,"/figures/obs_vs_pred_biomass.png"), plot = obs_vs_pred_biomass, dpi = 300, height = 5, width = 5, units = "in")
 
 
-mj = output1_1_non_trivial_varying_mj_.096$curvepoints[,1]
-mj = round(mj, 2)
+size_mat = output1_1_non_trivial_varying_mj_.096$curvepoints[,1]
+size_mat = round(size_mat, 2)
 juvenile_biomass = as.numeric(output1_1_non_trivial_varying_mj_.096$curvepoints[,5])
 adult_biomass = as.numeric(output1_1_non_trivial_varying_mj_.096$curvepoints[,6])
 
@@ -1021,53 +1065,61 @@ Total_biomass = juvenile_biomass+adult_biomass
 
 max(Total_biomass)
 
-mj[which(Total_biomass == max(Total_biomass))]
+size_mat[which(Total_biomass == max(Total_biomass, na.rm = TRUE))]
 
-mj_and_total_biomass <- cbind(mj, Total_biomass)
+mj_and_total_biomass <- cbind(size_mat, Total_biomass)
 
-mj_df = data.frame(rbind(cbind(mj,juvenile_biomass, rep("Juvenile",length(juvenile_biomass))),cbind(mj, adult_biomass, rep("Adult", length(adult_biomass)))))
+mj_df = data.frame(rbind(cbind(size_mat,juvenile_biomass, rep("Juvenile",length(juvenile_biomass))),cbind(size_mat, adult_biomass, rep("Adult", length(adult_biomass)))))
 colnames(mj_df) = c("mj","Biomass","Stage")
 mj_df$Stage = as.factor(mj_df$Stage)
 mj_df$Biomass = as.numeric(mj_df$Biomass)
 mj_df$mj = as.numeric(mj_df$mj)
 
-mj_adult_juvenile_ratio = data.frame(cbind(adult_biomass/juvenile_biomass, mj))
+mj_adult_juvenile_ratio = data.frame(cbind(adult_biomass/juvenile_biomass, size_mat))
 colnames(mj_adult_juvenile_ratio) = c("Ratio","mj")
+
 dev.off()
 
-a <- ggplot(data = mj_adult_juvenile_ratio, aes( y = Ratio, x = mj))  +
+a <- ggplot(data = mj_adult_juvenile_ratio, aes(y = Ratio, x = mj))  +
   geom_line() +
-  scale_x_continuous(limits = c(40,265.5))+
-  scale_y_continuous(limits = c(0.15,0.3)) + 
-  labs(x = "Size at Maturity (µg)", y = "Adult to Juvenile Biomass Ratio") +
+  scale_x_continuous(limits = c(2,265.5))+
+  scale_y_continuous(limits = c(0,0.75)) + 
+  labs(x = "Size at Maturity (µg)", y = "Adult:Juvenile Biomass Ratio") +
   theme_classic() +
-  theme(plot.margin = margin(0.2,0.2,0.2,0.75, "cm"),
-        axis.text = element_text(size = 12),
-        axis.title = element_text(size = 13)) 
- 
+  theme(plot.margin = margin(0.5,1,0.5,1, "cm"),
+        text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 13),
+        axis.title = element_text(size = 14))
+a
 
 b <- ggplot(data = mj_df, aes(y = Biomass, x = mj))  +
   facet_wrap(~Stage) +
   geom_line() +
   scale_x_continuous(limits = c(40,265.5))+
-  labs(x = NULL, y = expression(paste("Density (mg/", m^{3} ,")"))) +
+  labs(x = "Size at Maturity (µg)", y = expression(paste("Density (mg / ", m^{3} ,")"))) +
   theme_classic() +
-  theme(plot.margin = margin(0.2,0.2,0.2,0.75, "cm"),
-        axis.text = element_text(size = 12),
-        axis.title = element_text(size = 13),
-        strip.text.x = element_text(size = 12)) 
+  theme(plot.margin = margin(0.5,1,0.5,1, "cm"),
+        text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 13),
+        axis.title = element_text(size = 14),
+        strip.text.x = element_text(size = 13))
+      
 
-size_at_maturity_vs_biomass_and_Stage_ratio_graph <- ggarrange(a,b, ncol = 1, labels = c("B", "C"), heights = c(7,4))
+b
+
+
+size_at_maturity_vs_biomass_and_Stage_ratio_graph <- plot_grid(a,b, ncol = 1, rel_heights = c(4,3), labels = c("B", "C"), label_fontfamily = "Times New Roman", label_colour = "black")
 size_at_maturity_vs_biomass_and_Stage_ratio_graph
 
 #ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_and_Stage_ratio_graph.png"), plot = size_at_maturity_vs_biomass_and_Stage_ratio_graph, dpi = 300, height = 7, width = 7, units = "in")
 
+max(mj_adult_juvenile_ratio$Ratio)
 min(mj_adult_juvenile_ratio$Ratio)
 
 #Run this script to generate extinction_vs_size graph to combine with other graphs below
 source(paste0(root,"/Scripts/00_mj_analysis.R"))
 
-stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph, ncol = 2, rel_widths = c(4,5))
+stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph,  ncol = 2, rel_widths = c(4,5))
 
 stage_ratio_biomass_extinction_temp
 

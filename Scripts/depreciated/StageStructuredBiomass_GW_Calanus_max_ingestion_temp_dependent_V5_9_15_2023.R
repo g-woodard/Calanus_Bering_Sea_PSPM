@@ -400,9 +400,9 @@ LifeHistoryRates <- function(lifestage, istate, birthstate, BirthStateNr, E, par
     #21.3 Kj/g = .0213 J/µg Donnelly et al 1994 as cited in Schaafsma et al 2018
     #mean oxycalorific coefficient (1 mmol oxygen gas equates to the utilization of 434 J)
     #1 J uses 0.002304147 mmol of Oxygen
-    #0.002304147*(1/1000)*15.998*(10000000/1) # micro grams of oxygen in used in use of 1 J
-    #368.6174 micrograms of oxygen in used in use of 1 J
-    #1 ug of O2 is 0.00271284
+    #0.002304147*(1/1000)*15.998*(1000000/1) # micro grams of oxygen in used in use of 1 J
+    #36.86174 micrograms of oxygen in used in use of 1 J 
+    #1 ug of O2 is 0.0271284
     #1 calorie is 4.2 joules
     #1 mg O2 = 14.196 J so 1 ug of O2 = .014196 J (Elliot and Davison 1975)
     #3.38 Calories per mg O2 (Elliot and Davison 1975)

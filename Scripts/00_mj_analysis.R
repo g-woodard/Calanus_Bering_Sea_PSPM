@@ -4,6 +4,10 @@ library(ggplot2)
 library(ggpubr)
 library(cowplot)
 library(here)
+library(extrafont)
+
+theme_set(theme(text = element_text(family="Times New Roman")))
+set_null_device("png")
 
 root <- here()
 
@@ -17,7 +21,7 @@ mj = exp(-3.18)*exp(.73*12)
 # 0.7
 # 5055.09
 
-DefaultParameters <- c(Delta = 0.0014, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
                        Rmax = 2000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
@@ -31,63 +35,39 @@ DefaultParameters <- c(Delta = 0.0014, #turnover rate is 1 divided by the per ca
                        E_I = .46, #.46 for C. glacialis (Maps et al. 2012).  Ingestion Activation Energy, see if I can find another one for activity or attack rates
                        #Average of .6 Savage et al. 2004, as cited in (Crossier 1926; Raven and Geider 1988; Vetter 1995; Gillooly et al. 2001)
                        E_Delta = 0.5, #average activation energy of phytoplankton growth from Barton and Yvon-Durocher (2019) 
-                       #Im = 29.89,
-                       Im = 11.26, #Im ended up not being used in the final ingestion formulation, but left here to prevent breaking numeric indices
-                       #mean of just calanus at 15 C is 22.48333.  Mean of all species at 15 C is 17.74286
-                       #Im = 17.74286,
-                       t0_Im = 285.65, #average of Saiz Calbet data restricted to 10-15 C
                        
-                       #286.803, #mean temp of saiz and calbet dataframe when restricted to experiments between 10 and 15 degrees C
-                       cI = 0, #Jan assumes a value of 0 in Roach model 
-                       cM = 0.0,# Jan tests the Roach model with values of -.02, 0, and .02 
-                       Lambda1 = 2, #(Petersen, 1986)
-                       Lamda2 = 3.94, #(Petersen, 1986)
+                       
                        k = 8.617e-5, #boltzmann constant
-                       alpha = 0.75, #guess
+                       alpha = 0.75, #(Hjelm and Persson 2001)
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
-                       sigma = 0.7 , #0.6 (Kiørboe, 2008.) Converts ingested energy to biomass
-                       #0.66 works well
-                       Mopt = 87, #exp(-3.18)*exp(.73*12), #???????????
+                       sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       gamma1 = exp(-3.211e-06), #from Saiz and Calbet max ingestion data at 15 C
-                       gamma2 = 9.683e-03,
-                       gamma3 = 9.894e-01,
-                       t0_gamma = 288.15,
+                       Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       theta1 = exp(-3.6374366),
-                       theta2 = 0.2492352,
-                       theta3 = 0.8211947,
-                       t0_theta = 286.953, #mean of Saiz and Calbet ingestion data when restricted to specimens at between 10 and 15 C
-                       
-                       epsi1 = exp(0.83445), #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
-                       epsi2 = 0.70310 , #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
+                       epsi1 = 0.9827528, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.006059, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi3 = 0.996373, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
                        t0_epsi = 288.15,
                        
-                       epsilon1 = exp(-8.68361),
-                       epsilon2 = 0.35064, #from Saiz and Calbet max ingestion data at 15 C
-                       epsilon3 = 0.88576,
-                       epsilon4 = 0.01603,
-                       t0_epsilon = 288.15,
+                       #Kiorbe, Mohlenberg and Nicolajsen (2012) maximum rate equal to 85 % body C · d−1 at 15 °C
                        
-                       omega1 = 3.6577,
-                       omega2 = 0.3307,
-                       t0_omega = 286.953, #mean of Saiz and Calbet ingestion data when restricted to specimens at between 10 and 15 C
-                       
-                       phi1 = 1.336596, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C.  Dry weight
-                       phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  Might need to change my reference temp?
+                       phi1 = 1.3365966, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C.  Dry weight
+                       phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  
                        t0_phi = 288.15,
                        
-                       rho1 = exp(2.45033), #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
+                       rho1 = 0.02310296, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
                        rho2 = 0.75816, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
                        t0_rho = 275.15,
                        
                        mh = .75, # .75 ug (micrograms) (Petersen, 1986) -graph pg 68
                        mj = exp(-3.18)*exp(.73*12),   # ug (micrograms) (Petersen, 1986) pg 66
                        
-                       t0_Delta = 281.15 #8 degrees celsius from Maranon et al. at an intermediate nutrient level had turnover rate of about 1 day
+                       t0_Delta = 281.15, #8 degrees celsius from Maranon et al. at an intermediate nutrient level had turnover rate of about 1 day
                        #Turnover_Time = 2.19907e-7 #converted from ms to days from Falkowski et al 1981
                        
                        #z = 0.002694034 #juvenile to adult ratio 
+                       cI = 0, #Jan assumes a value of 0 in Roach model 
+                       cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
 
 library(lubridate)
@@ -137,7 +117,7 @@ unique(summer_Juvenile_year)[order(unique(summer_Juvenile_year))]
 unique(summer_Adult_year)[order(unique(summer_Adult_year))]
 #missing 1993,1994,1995,2013,2018
 
-Bering_SST = read.csv("Data/Bering_SST_12_06.csv")[c(49:65,67:70),] #1996 through 2012, 2014 through 2017
+Bering_SST = read.csv(paste0(root,"/Data/Bering_SST_12_06.csv"))[c(49:65,67:70),] #1996 through 2012, 2014 through 2017
 Bering_SST_Spring = rowMeans(Bering_SST[,4:6])+273.15
 Bering_SST_Summer = rowMeans(Bering_SST[,7:9])+273.15
 
@@ -242,11 +222,11 @@ for(a in 1:length(mj_sequence))
   
 {
   
-modified_parameters_2[46] =  mj_sequence[a]
+modified_parameters_2[25] =  mj_sequence[a]
 
 output1_1_A_hat_.096 <-PSPMequi(modelname = "Scripts/PSPM_Model_Structure.R", biftype = "EQ", startpoint = c(1, 1), 
-                     stepsize = 1.5,
-                     parbnds = c(1, 1, 10000), parameters = modified_parameters_2, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                     stepsize = 1.25,
+                     parbnds = c(1, 1, 20000), parameters = modified_parameters_2, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                      clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 
@@ -339,8 +319,11 @@ extinction_vs_size <- ggplot(extinction_temp_df)+
   geom_line(aes(x = Extinction_Temp, y = mj)) +
   labs(x = "Extinction Temperature °C", y = "Size at Maturity µg") + 
   theme_classic() +
-  theme(axis.text = element_text(size = 12),
-         axis.title = element_text(size = 13))
+  scale_y_continuous(limits = c(225,275) ) +
+  theme(text = element_text(family = "Times New Roman"),
+        axis.text = element_text(size = 13),
+        axis.title = element_text(size = 14))
 
-extinction_vs_size <- plot_grid(extinction_vs_size, labels = "A")
+extinction_vs_size <- plot_grid(extinction_vs_size, label_fontfamily = "Times New Roman", label_colour = "black", labels = c("A"))
+extinction_vs_size
 
