@@ -631,9 +631,9 @@ both_turnover_graph = ggplot(data = Turnover_DF_Both)+
 turnovergraphs <- ggarrange(per_capita_turnover_graph, total_turnover_graph, nrow = 1, font.label = list(size = 14, color = "black"))
 
 turnovergraphs <- annotate_figure(turnovergraphs,
-                                  left = text_grob("µg / day", size = 12, rot = 90),
+                                  left = text_grob("µg / day", size = 14, rot = 90, family = "Times New Roman"),
                                   #top = text_grob("Resource Turnover", size = 13),
-                                  bottom = text_grob("Temperature (°C)", size = 12)#,left = text_grob("Rate", size = 19, rot = 90)
+                                  bottom = text_grob("Temperature (°C)", size = 14, family = "Times New Roman")#,left = text_grob("Rate", size = 19, rot = 90)
 )
 
 turnovergraphs
@@ -646,13 +646,13 @@ parameter_rates_graph_alt
 
 
 parameter_rates_graph_alt <- annotate_figure(parameter_rates_graph_alt,
-                                         bottom = text_grob("Temperature (°C)", size = 12),
-                                         left = text_grob("µg / day", size = 12, rot = 90)
+                                         bottom = text_grob("Temperature (°C)", size = 14, family = "Times New Roman"),
+                                         left = text_grob("µg / day", size = 14, rot = 90, family = "Times New Roman")
 )
 
 parameter_rates_graph_alt
 
-parameter_rates_graph_alt_combined <- ggarrange(parameter_rates_graph_alt, turnovergraphs, align = "v", nrow = 2, labels = c("A", "B"))
+parameter_rates_graph_alt_combined <- ggarrange(parameter_rates_graph_alt, turnovergraphs, align = "v", nrow = 2, labels = c("A", "B"), font.label = list(family = "Times New Roman"))
 parameter_rates_graph_alt_combined
 
 ggsave(paste0(root,"/figures/parameter_rates_graph_alt.png"), plot = parameter_rates_graph_alt_combined, dpi = 500, height = 4, width = 7, units = "in")
@@ -1084,7 +1084,7 @@ a <- ggplot(data = mj_adult_juvenile_ratio, aes(y = Ratio, x = mj))  +
   geom_line() +
   scale_x_continuous(limits = c(2,265.5))+
   scale_y_continuous(limits = c(0,0.75)) + 
-  labs(x = "Size at Maturity (µg)", y = "Adult:Juvenile Biomass Ratio") +
+  labs(x = "Size at Maturity (µg)", y = "Adult : Juvenile Biomass Ratio") +
   theme_classic() +
   theme(plot.margin = margin(0.5,1,0.5,1, "cm"),
         text = element_text(family = "Times New Roman"),
