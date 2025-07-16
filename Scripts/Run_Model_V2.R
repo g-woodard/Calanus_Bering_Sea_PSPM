@@ -33,9 +33,10 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        
                        Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       epsi1 = 0.9827528, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
-                       epsi2 = 0.006059, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
-                       epsi3 = 0.996373, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
+                       
+                       epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
                        t0_epsi = 288.15,
                        
                        #Kiorbe, Mohlenberg and Nicolajsen (2012) maximum rate equal to 85 % body C · d−1 at 15 °C
@@ -375,9 +376,9 @@ Modified_Parameters_A_hat_.096 = DefaultParameters
 
 
 output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1,1), #startpoint is the parameter startpoint (in this case Rmax) and environmental (resource) start point
-                                stepsize = 1.25,
+                                stepsize = 1.01,
                                 #Vector indexes in C start at 0, so parbnds is varying the first parameter (Rmax) when we say to start it from parameter "1"
-                                parbnds = c(1, 1, 30000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                                parbnds = c(1, 1, 100000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                                 clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 output1_1_A_hat_.096$curvepoints

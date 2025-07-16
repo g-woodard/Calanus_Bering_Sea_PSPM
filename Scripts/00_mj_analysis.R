@@ -44,9 +44,9 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        
                        Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       epsi1 = 0.9827528, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
-                       epsi2 = 0.006059, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
-                       epsi3 = 0.996373, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
+                       epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
                        t0_epsi = 288.15,
                        
                        #Kiorbe, Mohlenberg and Nicolajsen (2012) maximum rate equal to 85 % body C · d−1 at 15 °C

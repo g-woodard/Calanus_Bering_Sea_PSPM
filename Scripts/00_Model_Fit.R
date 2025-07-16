@@ -36,9 +36,10 @@ EQ_Function = function(Delta, Mopt)
                          
                          Mopt = Mopt, #exp(-3.18)*exp(.73*12), #???????????
                          
-                         epsi1 = 0.9827528, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
-                         epsi2 = 0.006059, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
-                         epsi3 = 0.996373, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
+                         
+                         epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                         epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                         epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
                          t0_epsi = 288.15,
                          
                          #Kiorbe, Mohlenberg and Nicolajsen (2012) maximum rate equal to 85 % body C · d−1 at 15 °C
@@ -276,7 +277,7 @@ return(DF_Observed_Predicted)
   
 }
 
-Delta_Vector = seq(0.001, 0.006, 0.001) #rows
+Delta_Vector = seq(0.0015, 0.006, 0.0005) #rows
 Mopt_Vector = seq(37,100,2) #columns
   
 Parameter_combo_diff_A <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
@@ -358,5 +359,5 @@ Mopt_Vector[which(apply(parameter_combo_mean_diff, 2, min) == min(apply(paramete
 
 #267.4855
 
-plot(parameter_combo_mean_diff[3,]~Mopt_Vector)
+plot(parameter_combo_mean_diff[3,]~Mopt_Vector[])
 plot(parameter_combo_mean_diff[,2]~Delta_Vector)
