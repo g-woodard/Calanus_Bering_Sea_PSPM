@@ -33,7 +33,6 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        
                        Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       
                        epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                        epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
                        epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
@@ -58,7 +57,6 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        #z = 0.002694034 #juvenile to adult ratio 
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
-                       
 )
 
 library(lubridate)

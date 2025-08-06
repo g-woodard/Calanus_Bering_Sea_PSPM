@@ -278,7 +278,7 @@ return(DF_Observed_Predicted)
 }
 
 Delta_Vector = seq(0.0015, 0.006, 0.0005) #rows
-Mopt_Vector = seq(37,100,2) #columns
+Mopt_Vector = seq(37,50,1) #columns
   
 Parameter_combo_diff_A <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
 Parameter_combo_diff_J <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
@@ -347,6 +347,7 @@ rownames(parameter_combo_mean_diff) = Delta_Vector
 colnames(parameter_combo_mean_diff) = Mopt_Vector
 
 min(parameter_combo_mean_diff)
+#267.467
 
 apply(parameter_combo_mean_diff, 1, min)# row minimums
 Delta_Vector[which(apply(parameter_combo_mean_diff, 1, min) == min(apply(parameter_combo_mean_diff, 1, min)))]
@@ -355,9 +356,10 @@ Delta_Vector[which(apply(parameter_combo_mean_diff, 1, min) == min(apply(paramet
 
 apply(parameter_combo_mean_diff, 2, min)# column minimums
 Mopt_Vector[which(apply(parameter_combo_mean_diff, 2, min) == min(apply(parameter_combo_mean_diff, 2, min)))]
+
 # minimized Mopt = 39
 
-#267.4855
 
-plot(parameter_combo_mean_diff[3,]~Mopt_Vector[])
-plot(parameter_combo_mean_diff[,2]~Delta_Vector)
+
+plot(parameter_combo_mean_diff[4,3:5]~Mopt_Vector[3:5])
+plot(parameter_combo_mean_diff[,3]~Delta_Vector)
