@@ -10,9 +10,9 @@ set_null_device("png")
 
 root <- here()
 
-DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
-                       Rmax = 2000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
+                       Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
                        A_hat = 0.096, #0.096 liters per day filtering rate AKA volume swept clear via frost 1972. Units should be liters per day.
                        # Neocalanus plumchrus is close in size to C. marshallae at 567 µg.  Dagg and Wyman (1983) found a range of clearance rates between .0336 1.3344 L/day
@@ -31,7 +31,7 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                        sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
+                       Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
                        
                        epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                        epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
@@ -58,6 +58,7 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
+
 
 library(lubridate)
 
@@ -319,6 +320,12 @@ Temp_DF_2_graph <- Temp_DF_2 %>%
   mutate(fake_date = as.character(paste0(Year,"-01-01")) ) %>%
   mutate(fake_date = as.Date(fake_date)) 
   
+Temp_DF_2_graph_summer <- Temp_DF_2_graph %>%
+ filter(Season == "Summer") %>%
+          na.omit()
+
+m1 <- lm(Temp_DF_2_graph_summer$Temperature~as.numeric(Temp_DF_2_graph_summer$Year) )
+summary(m1)
 
 temp_graph <- ggplot(data = Temp_DF_2_graph, aes(x = fake_date, y = Temperature))+
   facet_wrap(~Season)+
@@ -630,7 +637,7 @@ both_turnover_graph = ggplot(data = Turnover_DF_Both)+
 turnovergraphs <- ggarrange(per_capita_turnover_graph, total_turnover_graph, nrow = 1, font.label = list(size = 14, color = "black"))
 
 turnovergraphs <- annotate_figure(turnovergraphs,
-                                  left = text_grob("µg / day", size = 14, rot = 90, family = "Times New Roman"),
+                                  left = text_grob(expression(paste(day^{-1})), size = 14, rot = 90, family = "Times New Roman"),
                                   #top = text_grob("Resource Turnover", size = 13),
                                   bottom = text_grob("Temperature (°C)", size = 14, family = "Times New Roman")#,left = text_grob("Rate", size = 19, rot = 90)
 )
@@ -922,7 +929,7 @@ Year_to_temp_DF[,"Year"] = c(DF3_J[,"Year"], DF3_A[,"Year"])
 
 Year_to_temp_DF = Year_to_temp_DF[,c(4,2,3,1)]
 colnames(Year_to_temp_DF) = c("Year", "Stage", "value", "Temperature")
-Year_to_temp_DF[,"Data_Type"] = rep("Predicted",nrow(Year_to_temp_DF))
+Year_to_temp_DF[,"Data_Type"] = rep("Fitted",nrow(Year_to_temp_DF))
 
 DF3_Summer = DF3[which(DF3[,"name"] == "Summer"),]
 DF3_Summer[,2] = as.character(DF3_Summer[,2])
@@ -958,6 +965,7 @@ DF_Summer_Observed_Predicted = rbind(DF3_Summer,Year_to_temp_DF)
 DF_Summer_Observed_Predicted[,2] = as.factor(DF_Summer_Observed_Predicted[,2])
 DF_Summer_Observed_Predicted[,5] = as.factor(DF_Summer_Observed_Predicted[,5])
 
+DF_Summer_Observed_Predicted$Data_Type <- factor(DF_Summer_Observed_Predicted$Data_Type, levels = c("Observed", "Fitted"), ordered = TRUE)
 
 ggplot(data =   DF3, aes(x = Year, y = (value), linetype = Stage))+
   facet_wrap(~name)+
@@ -986,7 +994,7 @@ observed_J <- DF_Summer_Observed_Predicted %>%
   rename(Observed = value)
 
 predicted_J <- DF_Summer_Observed_Predicted %>%
-  filter(Stage == "J" & Data_Type == "Predicted") %>%
+  filter(Stage == "J" & Data_Type == "Fitted") %>%
   select(Year, value) %>%
   rename(Predicted = value)
 
@@ -1001,15 +1009,13 @@ observed_A <- DF_Summer_Observed_Predicted %>%
   rename(Observed = value)
 
 predicted_A <- DF_Summer_Observed_Predicted %>%
-  filter(Stage == "A" & Data_Type == "Predicted") %>%
+  filter(Stage == "A" & Data_Type == "Fitted") %>%
   select(Year, value) %>%
   rename(Predicted = value)
 
 
 A_pred_obs <- predicted_A %>%
   left_join(observed_A)
-
-plot(A_pred_obs$Observed ~ A_pred_obs$Predicted)
 
 
 
@@ -1116,11 +1122,12 @@ max(mj_adult_juvenile_ratio$Ratio)
 min(mj_adult_juvenile_ratio$Ratio)
 
 #Run this script to generate extinction_vs_size graph to combine with other graphs below
-source(paste0(root,"/Scripts/00_mj_analysis.R"))
 
-stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph,  ncol = 2, rel_widths = c(4,5))
+#source(paste0(root,"/Scripts/00_mj_analysis.R"))
 
-stage_ratio_biomass_extinction_temp
+#stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph,  ncol = 2, rel_widths = c(4,5))
 
-ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_Stage_ratio_and_extinction_graph.png"), plot = stage_ratio_biomass_extinction_temp, dpi = 300, height = 6, width = 7, units = "in")
+#stage_ratio_biomass_extinction_temp
+
+#ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_Stage_ratio_and_extinction_graph.png"), plot = stage_ratio_biomass_extinction_temp, dpi = 300, height = 6, width = 7, units = "in")
 

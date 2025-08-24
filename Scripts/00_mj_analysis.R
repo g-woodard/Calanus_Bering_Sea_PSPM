@@ -21,9 +21,9 @@ mj = exp(-3.18)*exp(.73*12)
 # 0.7
 # 5055.09
 
-DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
-                       Rmax = 2000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
+                       Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
                        A_hat = 0.096, #0.096 liters per day filtering rate AKA volume swept clear via frost 1972. Units should be liters per day.
                        # Neocalanus plumchrus is close in size to C. marshallae at 567 µg.  Dagg and Wyman (1983) found a range of clearance rates between .0336 1.3344 L/day
@@ -42,7 +42,7 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                        sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       Mopt = 39, #exp(-3.18)*exp(.73*12), #???????????
+                       Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
                        
                        epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                        epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
@@ -69,6 +69,7 @@ DefaultParameters <- c(Delta = 0.003, #turnover rate is 1 divided by the per cap
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
+
 
 library(lubridate)
 

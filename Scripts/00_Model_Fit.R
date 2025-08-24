@@ -15,7 +15,7 @@ EQ_Function = function(Delta, Mopt)
   
   DefaultParameters <- c(Delta = Delta, #turnover rate is 1 divided by the per capita growth rate
                          # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
-                         Rmax = 2000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
+                         Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                          
                          A_hat = 0.096, #0.096 liters per day filtering rate AKA volume swept clear via frost 1972. Units should be liters per day.
                          # Neocalanus plumchrus is close in size to C. marshallae at 567 µg.  Dagg and Wyman (1983) found a range of clearance rates between .0336 1.3344 L/day
@@ -30,12 +30,11 @@ EQ_Function = function(Delta, Mopt)
                          
                          
                          k = 8.617e-5, #boltzmann constant
-                         alpha = 0.75, #guess
+                         alpha = 0.75, #(Hjelm and Persson 2001)
                          t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
-                         sigma = 0.7, #0.6 (Kiørboe, 2008.) Converts ingested energy to biomass
+                         sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                          
                          Mopt = Mopt, #exp(-3.18)*exp(.73*12), #???????????
-                         
                          
                          epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                          epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
@@ -123,10 +122,11 @@ EQ_Function = function(Delta, Mopt)
   
   
 Modified_Parameters_A_hat_.096 = DefaultParameters
-  
+
+#vary Rmax to find initial bifurcation point
 output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1, 1), 
-                                stepsize = 1.25,
-                                parbnds = c(1, 1, 20000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                                stepsize = .15,
+                                parbnds = c(1, 1, 600), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                                 clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 
@@ -136,29 +136,30 @@ df = data.frame(R_max = output1_1_A_hat_.096$curvepoints[, 1],
                 A = output1_1_A_hat_.096$curvepoints[, 6],
                 A_Hat = as.factor(rep(.096, nrow(output1_1_A_hat_.096$curvepoints))) )
 
+#Starting from initial bifurcation point, again vary Rmax to find equilibrium line.
 output1_1_non_trivial_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                       biftype = "EQ", startpoint = c(output1_1_A_hat_.096$bifpoints[1], output1_1_A_hat_.096$bifpoints[2], 0), 
-                                      stepsize = 1.25, parbnds = c(1, output1_1_A_hat_.096$bifpoints[1], 5000), parameters = Modified_Parameters_A_hat_.096, 
+                                      stepsize = 0.2, parbnds = c(1, output1_1_A_hat_.096$bifpoints[1], 1000), parameters = Modified_Parameters_A_hat_.096, 
                                       minvals = NULL, maxvals = NULL, clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
-
-
+#Below we need to get the point on the equilibrium line at an Rmax of 500. Because this was numerically implemented, the step size may mean we don't have a Rmax adn corresponding resource level E[0] at exactly 500.
+#Therefore, we find the closest option to Rmax = 500
 
 t1 = output1_1_non_trivial_.096$curvepoints
 
+#Start at a numeric step for Rmax as close to the official parameter value as possible:
+#Here I use a small deviation on either side of the official parameter value to obtain possible Rmax steps, then take the median to use as the start point.
 
-start_.096 = median(which(t1[,"Rmax"] < (Modified_Parameters_A_hat_.096[2]+500) & t1[,"Rmax"] > (Modified_Parameters_A_hat_.096[2]-500)))
+start_.096 = median(which(t1[,"Rmax"] < (Modified_Parameters_A_hat_.096[2]+20) & t1[,"Rmax"] > (Modified_Parameters_A_hat_.096[2]-20)))
 
 start_.096 = round(start_.096, 0)
-
 
 output1_1_non_trivial_varying_temperature_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                                           biftype = "EQ", startpoint = c(273.15, output1_1_non_trivial_.096$curvepoints[start_.096,2], 
                                                                                          output1_1_non_trivial_.096$curvepoints[start_.096,3]), 
-                                                          stepsize = 0.1,
-                                                          parbnds = c(3, 273.15, 305), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
+                                                          stepsize = 1.25,
+                                                          parbnds = c(3, 273.15, 310), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
                                                           clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
-
 
 
 Temp_A_hat_.096 = as.numeric(output1_1_non_trivial_varying_temperature_.096$curvepoints[,1])
@@ -277,8 +278,9 @@ return(DF_Observed_Predicted)
   
 }
 
-Delta_Vector = seq(0.0015, 0.006, 0.0005) #rows
-Mopt_Vector = seq(37,50,1) #columns
+
+Delta_Vector = seq(.01, .025, 0.001) #rows
+Mopt_Vector = seq(172, 183, 1) #columns
   
 Parameter_combo_diff_A <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
 Parameter_combo_diff_J <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
@@ -300,7 +302,8 @@ for(i in 1:length(Delta_Vector))
   cat("########################################")
 step = step + 1 
 print(step)
-  
+print(Delta_Vector[i])
+
   output = EQ_Function(Delta = Delta_Vector[i], Mopt = Mopt_Vector[z])
   
   
@@ -347,19 +350,19 @@ rownames(parameter_combo_mean_diff) = Delta_Vector
 colnames(parameter_combo_mean_diff) = Mopt_Vector
 
 min(parameter_combo_mean_diff)
-#267.467
-
+#262.1947
 apply(parameter_combo_mean_diff, 1, min)# row minimums
 Delta_Vector[which(apply(parameter_combo_mean_diff, 1, min) == min(apply(parameter_combo_mean_diff, 1, min)))]
 
-# minimized delta = 0.003
+# minimized delta = 0.017
 
 apply(parameter_combo_mean_diff, 2, min)# column minimums
 Mopt_Vector[which(apply(parameter_combo_mean_diff, 2, min) == min(apply(parameter_combo_mean_diff, 2, min)))]
 
-# minimized Mopt = 39
+# minimized Mopt = 178
 
 
-
-plot(parameter_combo_mean_diff[4,3:5]~Mopt_Vector[3:5])
-plot(parameter_combo_mean_diff[,3]~Delta_Vector)
+#Mopt
+ plot(parameter_combo_mean_diff[8,]~Mopt_Vector)
+#Delta
+ plot(parameter_combo_mean_diff[,7]~Delta_Vector)
