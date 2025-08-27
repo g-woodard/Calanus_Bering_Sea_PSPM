@@ -446,11 +446,15 @@ output1_1_non_trivial_varying_temperature_.096 <-PSPMequi(modelname = paste0(roo
                                                           parbnds = c(3, 273.15, 310), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
                                                           clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
+#This is important. Need to vary at the lowest extinction temperature.
+parameters_vary_mj <- Modified_Parameters_A_hat_.096
+parameters_vary_mj[4] <- 14.70219 +273.15
+
 output1_1_non_trivial_varying_mj_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                                  biftype = "EQ", startpoint = c(265.0716, output1_1_non_trivial_varying_temperature_.096$bifpoints[2], output1_1_non_trivial_varying_temperature_.096$bifpoints[3] 
                                                  ), 
                                                  stepsize = -.1,
-                                                 parbnds = c(24, 0, 265.0716), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
+                                                 parbnds = c(24, 0, 265.0716), parameters = parameters_vary_mj, minvals = NULL, maxvals = NULL, 
                                                  clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 Total_Population_A_Hat = output1_1_non_trivial_varying_temperature_.096$curvepoints[, 5]+output1_1_non_trivial_varying_temperature_.096$curvepoints[, 6]
@@ -1061,6 +1065,7 @@ ggsave(paste0(root,"/figures/obs_vs_pred_biomass.png"), plot = obs_vs_pred_bioma
 
 size_mat = output1_1_non_trivial_varying_mj_.096$curvepoints[,1]
 size_mat = round(size_mat, 2)
+
 juvenile_biomass = as.numeric(output1_1_non_trivial_varying_mj_.096$curvepoints[,5])
 adult_biomass = as.numeric(output1_1_non_trivial_varying_mj_.096$curvepoints[,6])
 
@@ -1123,11 +1128,11 @@ min(mj_adult_juvenile_ratio$Ratio)
 
 #Run this script to generate extinction_vs_size graph to combine with other graphs below
 
-#source(paste0(root,"/Scripts/00_mj_analysis.R"))
+source(paste0(root,"/Scripts/00_mj_analysis.R"))
 
-#stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph,  ncol = 2, rel_widths = c(4,5))
+stage_ratio_biomass_extinction_temp <- plot_grid(extinction_vs_size, size_at_maturity_vs_biomass_and_Stage_ratio_graph,  ncol = 2, rel_widths = c(4,5))
 
-#stage_ratio_biomass_extinction_temp
+stage_ratio_biomass_extinction_temp
 
-#ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_Stage_ratio_and_extinction_graph.png"), plot = stage_ratio_biomass_extinction_temp, dpi = 300, height = 6, width = 7, units = "in")
+ggsave(paste0(root,"/figures/size_at_maturity_vs_biomass_Stage_ratio_and_extinction_graph.png"), plot = stage_ratio_biomass_extinction_temp, dpi = 300, height = 6, width = 7, units = "in")
 

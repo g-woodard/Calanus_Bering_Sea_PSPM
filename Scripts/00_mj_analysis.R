@@ -320,7 +320,7 @@ extinction_vs_size <- ggplot(extinction_temp_df)+
   geom_line(aes(x = Extinction_Temp, y = mj)) +
   labs(x = "Extinction Temperature °C", y = "Size at Maturity µg") + 
   theme_classic() +
-  scale_y_continuous(limits = c(225,275) ) +
+  #scale_y_continuous(limits = c(225,275) ) +
   theme(text = element_text(family = "Times New Roman"),
         axis.text = element_text(size = 13),
         axis.title = element_text(size = 14))
