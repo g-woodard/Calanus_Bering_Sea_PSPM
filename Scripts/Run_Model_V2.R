@@ -448,7 +448,7 @@ output1_1_non_trivial_varying_temperature_.096 <-PSPMequi(modelname = paste0(roo
 
 #This is important. Need to vary at the lowest extinction temperature.
 parameters_vary_mj <- Modified_Parameters_A_hat_.096
-parameters_vary_mj[4] <- 14.70219 +273.15
+parameters_vary_mj[4] <- 14.70219 + 273.15
 
 output1_1_non_trivial_varying_mj_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                                  biftype = "EQ", startpoint = c(265.0716, output1_1_non_trivial_varying_temperature_.096$bifpoints[2], output1_1_non_trivial_varying_temperature_.096$bifpoints[3] 
@@ -596,7 +596,6 @@ both_mortality_graph = ggplot(data = Mortality_DF_Both)+
   geom_line(aes(x=Temperature, y=value, linetype = Rate, group = Rate)) +
   labs(x= NULL, y=NULL, title = "Mortality") +
   scale_linetype_manual(values = c(1,2)) +
-  scale_y_continuous(breaks = seq(0,0.012, by = 0.002)) +
   theme_classic() +
   theme(text = element_text(family = "Times New Roman"),
         axis.text = element_text(size = 12),
@@ -1069,8 +1068,8 @@ size_mat = round(size_mat, 2)
 juvenile_biomass = as.numeric(output1_1_non_trivial_varying_mj_.096$curvepoints[,5])
 adult_biomass = as.numeric(output1_1_non_trivial_varying_mj_.096$curvepoints[,6])
 
-juvenile_biomass = round(juvenile_biomass, 4)
-adult_biomass = round(adult_biomass, 4)
+juvenile_biomass = round(juvenile_biomass, 7)
+adult_biomass = round(adult_biomass, 7)
 Total_biomass = juvenile_biomass+adult_biomass
 
 max(Total_biomass)
@@ -1092,8 +1091,8 @@ dev.off()
 
 a <- ggplot(data = mj_adult_juvenile_ratio, aes(y = Ratio, x = mj))  +
   geom_line() +
-  scale_x_continuous(limits = c(2,265.5))+
-  scale_y_continuous(limits = c(0,0.75)) + 
+  scale_x_continuous(limits = c(0.76,265.5))+
+  scale_y_continuous(limits = c(0,2.5)) + 
   labs(x = "Size at Maturity (µg)", y = "Adult : Juvenile Biomass Ratio") +
   theme_classic() +
   theme(plot.margin = margin(0.5,1,0.5,1, "cm"),
