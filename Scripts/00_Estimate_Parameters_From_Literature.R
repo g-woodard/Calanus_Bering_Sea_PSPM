@@ -68,6 +68,7 @@ log_food_15_C = log(Saiz_Calbert_2007_max_ingestion_vs_size_15_C[,"Body.Size"]*(
 plot(log_max_ingest_15_C~log_body_size_15_C)
 
 lm1 = lm(log_max_ingest_15_C~log_body_size_15_C+log_food_15_C)
+#lm1 = lm(log_max_ingest_15_C~log_body_size_15_C)
 
 summary(lm1)
 exp(lm1[["coefficients"]][["(Intercept)"]])

@@ -10,6 +10,7 @@ set_null_device("png")
 
 root <- here()
 
+
 DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
                        Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
@@ -35,7 +36,10 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        
                        epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                        epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       
+                       #The use of epsi3 depends on the Imax formulation used.
                        epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
+                       
                        t0_epsi = 288.15,
                        
                        #Kiorbe, Mohlenberg and Nicolajsen (2012) maximum rate equal to 85 % body C · d−1 at 15 °C
@@ -58,8 +62,8 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
-
-
+  
+  
 library(lubridate)
 
 Bering_Calanus_Data = read.csv(paste0(root,"/Data/Calanus_BSMS.csv"))
