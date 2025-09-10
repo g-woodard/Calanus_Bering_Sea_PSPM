@@ -62,8 +62,8 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
-  
-  
+ 
+ 
 library(lubridate)
 
 Bering_Calanus_Data = read.csv(paste0(root,"/Data/Calanus_BSMS.csv"))

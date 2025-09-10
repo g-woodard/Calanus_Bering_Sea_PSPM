@@ -66,8 +66,12 @@ log_food_15_C = log(Saiz_Calbert_2007_max_ingestion_vs_size_15_C[,"Body.Size"]*(
 #Now the regression is is log(Carbon ingested) ~ log(Copepod DRY WEIGHT)
 
 plot(log_max_ingest_15_C~log_body_size_15_C)
+plot(log_max_ingest_15_C~log_food_15_C)
 
-lm1 = lm(log_max_ingest_15_C~log_body_size_15_C+log_food_15_C)
+#Size and Resource Dependent
+lm1 = lm(log_max_ingest_15_C ~ log_body_size_15_C + log_food_15_C)
+
+#Size dependence only
 #lm1 = lm(log_max_ingest_15_C~log_body_size_15_C)
 
 summary(lm1)

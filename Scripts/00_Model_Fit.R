@@ -14,7 +14,7 @@ EQ_Function = function(Delta, Mopt)
 {
   
   
-  DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
+  DefaultParameters <- c(Delta = Delta, #turnover rate is 1 divided by the per capita growth rate
                          # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
                          Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                          
@@ -35,7 +35,7 @@ EQ_Function = function(Delta, Mopt)
                          t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                          sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                          
-                         Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
+                         Mopt = Mopt, #exp(-3.18)*exp(.73*12), #???????????
                          
                          epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                          epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
@@ -130,7 +130,7 @@ Modified_Parameters_A_hat_.096 = DefaultParameters
 #vary Rmax to find initial bifurcation point
 output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1, 1), 
                                 stepsize = .15,
-                                parbnds = c(1, 1, 600), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                                parbnds = c(1, 1, 10000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                                 clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 
@@ -283,9 +283,14 @@ return(DF_Observed_Predicted)
 }
 
 
-Delta_Vector = seq(0.013, 0.02,.001) #rows
-Mopt_Vector = seq(172,184,1) #columns
+Delta_Vector = seq(0.012,0.02,0.001) #rows
+Mopt_Vector = seq(173, 182, 1) #columns
   
+
+ Delta_Vector = 1  #rows
+ Mopt_Vector = 265 #columns
+
+
 Parameter_combo_diff_A <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
 Parameter_combo_diff_J <- array(dim = c(length(Delta_Vector), length(Mopt_Vector)))
 
