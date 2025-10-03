@@ -146,8 +146,8 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        
                        Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
-                       epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi1 = 1.089234, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.76662, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
                        
                        #The use of epsi3 depends on the Imax formulation used.
                        epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
@@ -338,10 +338,10 @@ LifeHistoryRates <- function(lifestage, istate, birthstate, BirthStateNr, E, par
     
   
     #Here the Imax formulation also depends on Resource density
-    Imax = exp(E_I*(Temp-t0_epsi)/((k)*Temp*t0_epsi))* epsi1 * Size^(epsi2 + cI*(Temp-t0_epsi)) * R^(epsi3 + cI*(Temp-t0_epsi))
+    #Imax = exp(E_I*(Temp-t0_epsi)/((k)*Temp*t0_epsi))* epsi1 * Size^(epsi2 + cI*(Temp-t0_epsi)) * R^(epsi3 + cI*(Temp-t0_epsi))
     
     #Here the Imax formulation only depends on mass
-    #Imax = exp(E_I*(Temp-t0_epsi)/((k)*Temp*t0_epsi))* epsi1 * Size^(epsi2 + cI*(Temp-t0_epsi))
+    Imax = exp(E_I*(Temp-t0_epsi)/((k)*Temp*t0_epsi))* epsi1 * Size^(epsi2 + cI*(Temp-t0_epsi))
     
     Ingest = Imax*((n)/(n+Imax)) #Formula from Kiorbe et al 2018
     

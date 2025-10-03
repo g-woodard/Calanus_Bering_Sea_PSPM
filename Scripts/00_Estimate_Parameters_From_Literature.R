@@ -47,7 +47,7 @@ Saiz_Calbert_2007_max_ingestion_vs_size_15_C = read.csv(paste0(root,"/Data/Saiz_
 #Filter out carnivorous copepods
 
 Saiz_Calbert_2007_max_ingestion_vs_size_15_C <- Saiz_Calbert_2007_max_ingestion_vs_size_15_C %>%
-  filter(Diet == "H")
+  filter(Diet == "H") 
   
 
 plot(Saiz_Calbert_2007_max_ingestion_vs_size_15_C[,"Max.Ingestion"]~Saiz_Calbert_2007_max_ingestion_vs_size_15_C[,"Body.Size"]) 
@@ -69,10 +69,10 @@ plot(log_max_ingest_15_C~log_body_size_15_C)
 plot(log_max_ingest_15_C~log_food_15_C)
 
 #Size and Resource Dependent
-lm1 = lm(log_max_ingest_15_C ~ log_body_size_15_C + log_food_15_C)
+#lm1 = lm(log_max_ingest_15_C ~ log_body_size_15_C + log_food_15_C)
 
 #Size dependence only
-#lm1 = lm(log_max_ingest_15_C~log_body_size_15_C)
+lm1 = lm(log_max_ingest_15_C~log_body_size_15_C)
 
 summary(lm1)
 exp(lm1[["coefficients"]][["(Intercept)"]])

@@ -11,7 +11,7 @@ set_null_device("png")
 root <- here()
 
 
-DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = .0001, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
                        Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
@@ -32,10 +32,10 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                        sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
+                       Mopt = 265, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
-                       epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi1 = 1.089234, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.76662, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
                        
                        #The use of epsi3 depends on the Imax formulation used.
                        epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
@@ -385,9 +385,9 @@ Modified_Parameters_A_hat_.096 = DefaultParameters
 
 
 output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1,1), #startpoint is the parameter startpoint (in this case Rmax) and environmental (resource) start point
-                                stepsize = 1.01,
+                                stepsize = .1,
                                 #Vector indexes in C start at 0, so parbnds is varying the first parameter (Rmax) when we say to start it from parameter "1"
-                                parbnds = c(1, 1, 100000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                                parbnds = c(1, 1, 50000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                                 clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 output1_1_A_hat_.096$curvepoints
