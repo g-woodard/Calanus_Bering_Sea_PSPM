@@ -1,3 +1,4 @@
+
 library(PSPManalysis)
 library(tidyverse)
 library(ggplot2)
@@ -20,14 +21,13 @@ mj = exp(-3.18)*exp(.73*12)
 # 98
 # 0.7
 # 5055.09
-
-DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 1, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
-                       Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
+                       Rmax = 12000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
                        A_hat = 0.096, #0.096 liters per day filtering rate AKA volume swept clear via frost 1972. Units should be liters per day.
                        # Neocalanus plumchrus is close in size to C. marshallae at 567 µg.  Dagg and Wyman (1983) found a range of clearance rates between .0336 1.3344 L/day
-                       
+                       H = 1,
                        
                        Temp = 273.15,  #20 C is 293.15 K 
                        E_mu = .57,  #.57 eV (McCoy et al. 2008) 
@@ -42,10 +42,10 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                        sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
+                       Mopt = 150, #exp(-3.18)*exp(.73*12), #???????????
                        
-                       epsi1 = 0.9902766, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
-                       epsi2 = 0.002102, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
+                       epsi1 = 1.089234, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
+                       epsi2 = 0.76662, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
                        
                        #The use of epsi3 depends on the Imax formulation used.
                        epsi3 = 0.998725, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species.  15 C.
@@ -58,9 +58,9 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  
                        t0_phi = 288.15,
                        
-                       rho1 = 0.02310296, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
-                       rho2 = 0.75816, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
-                       t0_rho = 275.15,
+                       rho1 = 0.06009415, #micro grams per day, from Ikeda_2007.  Dry weight at 1.5 C
+                       rho2 = 0.73020, #micro grams per day, from Ikeda_2007.  Dry weight at 1.5 C
+                       t0_rho = 274.65,
                        
                        mh = .75, # .75 ug (micrograms) (Petersen, 1986) -graph pg 68
                        mj = exp(-3.18)*exp(.73*12),   # ug (micrograms) (Petersen, 1986) pg 66
@@ -227,7 +227,7 @@ for(a in 1:length(mj_sequence))
   
 {
   
-modified_parameters_2[25] =  mj_sequence[a]
+modified_parameters_2[26] =  mj_sequence[a]
 
 output1_1_A_hat_.096 <-PSPMequi(modelname = "Scripts/PSPM_Model_Structure.R", biftype = "EQ", startpoint = c(1, 1), 
                      stepsize = 1.25,
@@ -297,7 +297,7 @@ output1_1_non_trivial_varying_temperature_.096 <-PSPMequi(modelname = "Scripts/P
                                                           biftype = "EQ", startpoint = c(273.15, output1_1_non_trivial_.096$curvepoints[start_.096,2], 
                                                           output1_1_non_trivial_.096$curvepoints[start_.096,3]), 
                                                           stepsize = .1,
-                                                          parbnds = c(3, 273.15, 320), parameters = modified_parameters_2, minvals = NULL, maxvals = NULL, 
+                                                          parbnds = c(4, 273.15, 320), parameters = modified_parameters_2, minvals = NULL, maxvals = NULL, 
                                                           clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
  
 

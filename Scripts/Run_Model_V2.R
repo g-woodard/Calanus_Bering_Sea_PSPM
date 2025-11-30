@@ -1,3 +1,4 @@
+
 library(PSPManalysis)
 library(tidyverse)
 library(ggplot2)
@@ -10,14 +11,13 @@ set_null_device("png")
 
 root <- here()
 
-
-DefaultParameters <- c(Delta = .0001, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 1, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
-                       Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
+                       Rmax = 12000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
                        A_hat = 0.096, #0.096 liters per day filtering rate AKA volume swept clear via frost 1972. Units should be liters per day.
                        # Neocalanus plumchrus is close in size to C. marshallae at 567 µg.  Dagg and Wyman (1983) found a range of clearance rates between .0336 1.3344 L/day
-                       
+                       H = 1,
                        
                        Temp = 273.15,  #20 C is 293.15 K 
                        E_mu = .57,  #.57 eV (McCoy et al. 2008) 
@@ -32,7 +32,7 @@ DefaultParameters <- c(Delta = .0001, #turnover rate is 1 divided by the per cap
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                        sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       Mopt = 265, #exp(-3.18)*exp(.73*12), #???????????
+                       Mopt = 150, #exp(-3.18)*exp(.73*12), #???????????
                        
                        epsi1 = 1.089234, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                        epsi2 = 0.76662, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
@@ -48,9 +48,9 @@ DefaultParameters <- c(Delta = .0001, #turnover rate is 1 divided by the per cap
                        phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  
                        t0_phi = 288.15,
                        
-                       rho1 = 0.02310296, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
-                       rho2 = 0.75816, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
-                       t0_rho = 275.15,
+                       rho1 = 0.06009415, #micro grams per day, from Ikeda_2007.  Dry weight at 1.5 C
+                       rho2 = 0.73020, #micro grams per day, from Ikeda_2007.  Dry weight at 1.5 C
+                       t0_rho = 274.65,
                        
                        mh = .75, # .75 ug (micrograms) (Petersen, 1986) -graph pg 68
                        mj = exp(-3.18)*exp(.73*12),   # ug (micrograms) (Petersen, 1986) pg 66
@@ -62,7 +62,7 @@ DefaultParameters <- c(Delta = .0001, #turnover rate is 1 divided by the per cap
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
- 
+
  
 library(lubridate)
 
@@ -387,11 +387,16 @@ Modified_Parameters_A_hat_.096 = DefaultParameters
 output1_1_A_hat_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), biftype = "EQ", startpoint = c(1,1), #startpoint is the parameter startpoint (in this case Rmax) and environmental (resource) start point
                                 stepsize = .1,
                                 #Vector indexes in C start at 0, so parbnds is varying the first parameter (Rmax) when we say to start it from parameter "1"
-                                parbnds = c(1, 1, 50000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
+                                parbnds = c(1, 1, 100000), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, options = c(c("popZE", "0")),
                                 clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
-output1_1_A_hat_.096$curvepoints
 
+
+#Total adult plus juvenile biomass versus resource density
+ggplot() +
+  geom_line(aes( y = (output1_1_A_hat_.096$curvepoints[,7]+output1_1_A_hat_.096$curvepoints[,8]), x = output1_1_A_hat_.096$curvepoints[,2]))
+
+test_output <- output1_1_A_hat_.096$curvepoints
 
 df = data.frame(R_max = output1_1_A_hat_.096$curvepoints[, 1],
                 R = output1_1_A_hat_.096$curvepoints[, 2],
@@ -401,8 +406,12 @@ df = data.frame(R_max = output1_1_A_hat_.096$curvepoints[, 1],
 
 output1_1_non_trivial_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                       biftype = "EQ", startpoint = c(output1_1_A_hat_.096$bifpoints[1], output1_1_A_hat_.096$bifpoints[2], 0), 
-                                      stepsize = 1.25, parbnds = c(1, output1_1_A_hat_.096$bifpoints[1], 10000), parameters = Modified_Parameters_A_hat_.096, 
+                                      stepsize = 1.1, parbnds = c(1, output1_1_A_hat_.096$bifpoints[1], 100000), parameters = Modified_Parameters_A_hat_.096, 
                                       minvals = NULL, maxvals = NULL, clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
+
+
+ggplot() +
+  geom_line(aes( y = (output1_1_non_trivial_.096$curvepoints[,7]+output1_1_non_trivial_.096$curvepoints[,8]), x = output1_1_non_trivial_.096$curvepoints[,1]))
 
 
 output1_1_non_trivial_.096$curvepoints[,12]
@@ -446,19 +455,19 @@ df2 <- df2 %>%
 output1_1_non_trivial_varying_temperature_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                                           biftype = "EQ", startpoint = c(273.15, output1_1_non_trivial_.096$curvepoints[start_.096,2], 
                                                                                          output1_1_non_trivial_.096$curvepoints[start_.096,3]), 
-                                                          stepsize = .2,
-                                                          parbnds = c(3, 273.15, 310), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
+                                                          stepsize = .5,
+                                                          parbnds = c(4, 273.15, 310), parameters = Modified_Parameters_A_hat_.096, minvals = NULL, maxvals = NULL, 
                                                           clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 #This is important. Need to vary at the lowest extinction temperature.
 parameters_vary_mj <- Modified_Parameters_A_hat_.096
-parameters_vary_mj[4] <- 14.70219 + 273.15
+parameters_vary_mj[5] <- 14.70219 + 273.15
 
 output1_1_non_trivial_varying_mj_.096 <-PSPMequi(modelname = paste0(root,"/Scripts/PSPM_Model_Structure.R"), 
                                                  biftype = "EQ", startpoint = c(265.0716, output1_1_non_trivial_varying_temperature_.096$bifpoints[2], output1_1_non_trivial_varying_temperature_.096$bifpoints[3] 
                                                  ), 
                                                  stepsize = -.1,
-                                                 parbnds = c(24, 0, 265.0716), parameters = parameters_vary_mj, minvals = NULL, maxvals = NULL, 
+                                                 parbnds = c(25, 0, 265.0716), parameters = parameters_vary_mj, minvals = NULL, maxvals = NULL, 
                                                  clean = TRUE, force = FALSE, debug = FALSE, silent = FALSE)
 
 Total_Population_A_Hat = output1_1_non_trivial_varying_temperature_.096$curvepoints[, 5]+output1_1_non_trivial_varying_temperature_.096$curvepoints[, 6]

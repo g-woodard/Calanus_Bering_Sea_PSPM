@@ -1,202 +1,255 @@
-﻿Species,Stage,Depth water [m],Treat temp [¬∞C],Resp O2/ind [¬µl/#/h],BM dry [mg],N [mg],C [mg],Ref data
-Aetideopsis rostrata,C5F,1500,2,0.122,0.707,0.058,0.4,Ikeda et al. (2006)
-Aetideopsis rostrata,C5M,750,3,0.397,0.762,0.08,0.3,Ikeda et al. (2006)
-Aetideopsis rostrata,C5M,1500,2,0.42,1.84,0.106,1,Ikeda et al. (2006)
-Amallothrix inornata,C5M,1500,2,0.363,0.912,0.066,0.6,Ikeda et al. (2006)
-Amallothrix inornata,C6F,1500,2,0.21,0.946,0.076,0.5,Ikeda et al. (2006)
-Amallothrix inornata,C6F,2500,1.5,0.433,0.803,0.084,0.4,Ikeda et al. (2006)
-Amallothrix inornata,C6F,2500,1.5,0.369,1.029,0.107,0.5,Ikeda et al. (2006)
-Amallothrix inornata,C6M,1500,2,0.166,0.524,0.042,0.3,Ikeda et al. (2006)
-Amallothrix paravalida,C6F,1500,2,0.26,0.664,0.047,0.4,Ikeda et al. (2006)
-Amallothrix valida,C5F,1500,2,0.287,1,0.075,0.6,Ikeda et al. (2006)
-Amallothrix valida,C5M,750,3,0.281,0.684,0.055,0.4,Ikeda et al. (2006)
-Amallothrix valida,C6F,750,3,0.562,0.872,0.094,0.4,Ikeda et al. (2006)
-Amallothrix valida,C6F,1500,2,0.316,1.094,0.079,0.7,Ikeda et al. (2006)
-Bathycalanus bradyi,C6F,1500,2,4.17,34.49,2.38,21.8,Ikeda et al. (2006)
-Bathycalanus bradyi,C6F,2500,1.5,1.259,16.78,1.195,9.9,Ikeda et al. (2006)
-Bathycalanus bradyi,C6F,2500,1.5,1.052,10.52,0.915,5,Ikeda et al. (2006)
-Bradyidius pacificus,C5M,1500,2,0.225,0.89,0.078,0.5,Ikeda et al. (2006)
-Candacia columbiae,C6M,750,3,0.231,0.435,0.05,0.2,Ikeda et al. (2006)
-Chiridius pacificus,C6F,750,3,0.42,0.692,0.08,0.3,Ikeda et al. (2006)
-Chirundina streetsi,C6F,750,3,0.787,1.237,0.158,0.5,Ikeda et al. (2006)
-Cornucalanus indicus,C5F,1500,2,0.962,3.55,0.299,1.8,Ikeda et al. (2006)
-Cornucalanus indicus,C6F,1500,2,1.017,6.919,0.549,3.8,Ikeda et al. (2006)
-Euaugaptilus pseudaffinis,C6F,2500,1.5,0.202,1.681,0.127,0.9,Ikeda et al. (2006)
-Euchirella brevis,C6F,750,3,0.51,0.952,0.084,0.5,Ikeda et al. (2006)
-Euchirella galeata,C6F,750,3,1.139,2.459,0.28,1.1,Ikeda et al. (2006)
-Euchirella messinensis,C6F,750,3,1.02,1.917,0.215,0.9,Ikeda et al. (2006)
-Euchirella rostrata,C6F,750,3,0.558,0.93,0.086,0.5,Ikeda et al. (2006)
-Euchirella rostrata,C6F,1500,2,0.242,0.804,0.09,0.4,Ikeda et al. (2006)
-Euchirella rostrata,C6F,1500,2,0.511,0.82,0.102,0.3,Ikeda et al. (2006)
-Euchirella truncata,C4M,750,3,0.086,0.517,0.054,0.2,Ikeda et al. (2006)
-Gaetanus paracurvicornis,C6F,2500,1.5,0.222,0.735,0.069,0.3,Ikeda et al. (2006)
-Gaidius brevispinus,C6F,750,3,0.432,0.914,0.077,0.4,Ikeda et al. (2006)
-Gaidius brevispinus,C6F,750,3,0.362,0.949,0.104,0.4,Ikeda et al. (2006)
-Gaidius brevispinus,C6F,1500,2,0.27,0.971,0.099,0.4,Ikeda et al. (2006)
-Gaidius robustus,C4F,750,3,0.228,0.381,0.041,0.2,Ikeda et al. (2006)
-Gaidius robustus,C5M,2500,1.5,0.251,0.708,0.068,0.3,Ikeda et al. (2006)
-Gaidius robustus,C5M,2500,1.5,0.785,3.444,0.209,2.2,Ikeda et al. (2006)
-Gaidius robustus,C5M,2500,1.5,0.346,1.261,0.104,0.5,Ikeda et al. (2006)
-Gaidius robustus,C6F,2500,1.5,1.322,7.03,0.672,3.5,Ikeda et al. (2006)
-Gaidius tenuispinus,C5F,750,3,0.77,1.238,0.117,0.6,Ikeda et al. (2006)
-Gaidius tenuispinus,C6F,750,3,0.251,0.436,0.053,0.2,Ikeda et al. (2006)
-Gaidius variabilis,C5F,750,3,0.225,0.323,0.034,0.1,Ikeda et al. (2006)
-Gaidius variabilis,C5F,2500,1.5,0.258,0.835,0.085,0.4,Ikeda et al. (2006)
-Gaidius variabilis,C5M,750,3,0.237,0.488,0.051,0.2,Ikeda et al. (2006)
-Gaidius variabilis,C6F,750,3,0.295,0.509,0.055,0.2,Ikeda et al. (2006)
-Gaidius variabilis,C6F,1500,2,0.187,0.672,0.067,0.3,Ikeda et al. (2006)
-Gaidius variabilis,C6F,1500,2,0.3,0.935,0.1,0.4,Ikeda et al. (2006)
-Gaidius variabilis,C6F,2500,1.5,0.155,1.316,0.102,0.7,Ikeda et al. (2006)
-Heterostylites major,C6F,2500,1.5,0.162,0.528,0.05,0.2,Ikeda et al. (2006)
-Lophothrix frontalis,C6F,1500,2,0.922,3.19,0.303,1.5,Ikeda et al. (2006)
-Lophothrix frontalis,C6F,1500,2,0.607,1.416,0.128,0.8,Ikeda et al. (2006)
-Lucicutia bicornuta,C6F,1500,2,0.247,1.017,0.075,0.5,Ikeda et al. (2006)
-Lucicutia bicornuta,C6M,750,3,0.121,0.625,0.05,0.3,Ikeda et al. (2006)
-Lucicutia ellipsoidalis,C6F,2500,1.5,0.271,0.777,0.049,0.4,Ikeda et al. (2006)
-Lucicutia grandis,C5F,750,3,0.113,0.429,0.032,0.2,Ikeda et al. (2006)
-Lucicutia grandis,C6F,2500,1.5,0.238,1.398,0.093,0.7,Ikeda et al. (2006)
-Lucicutia grandis,C6M,1500,2,0.408,2.192,0.19,1.2,Ikeda et al. (2006)
-Lucicutia grandis,C6M,2500,1.5,0.157,1.528,0.093,0.9,Ikeda et al. (2006)
-Lucicutia longifurca,C5,2500,1.5,0.122,1.189,0.095,0.6,Ikeda et al. (2006)
-Lucicutia longifurca,C6M,2500,1.5,0.291,1.534,0.092,0.9,Ikeda et al. (2006)
-Lucicutia pacifica,C6F,1500,2,0.268,1.81,0.131,0.9,Ikeda et al. (2006)
-Lucicutia pacifica,C6F,1500,2,0.451,1.634,0.119,0.8,Ikeda et al. (2006)
-Lucicutia pacifica,C6F,2500,1.5,0.271,1.705,0.132,0.9,Ikeda et al. (2006)
-Metridia asymmetrica,C6F,750,3,0.175,0.457,0.033,0.2,Ikeda et al. (2006)
-Metridia asymmetrica,C6F,1500,2,0.046,0.36,0.027,0.2,Ikeda et al. (2006)
-Metridia asymmetrica,C6F,1500,2,0.077,0.344,0.025,0.2,Ikeda et al. (2006)
-Metridia asymmetrica,C6F,2500,1.5,0.083,0.425,0.032,0.2,Ikeda et al. (2006)
-Metridia asymmetrica,C6F,2500,1.5,0.138,0.453,0.037,0.2,Ikeda et al. (2006)
-Metridia curticauda,C6F,750,3,0.141,0.484,0.034,0.3,Ikeda et al. (2006)
-Metridia curticauda,C6F,1500,2,0.066,0.99,0.073,0.5,Ikeda et al. (2006)
-Metridia okhotensis,C6F,750,3,0.292,0.713,0.05,0.4,Ikeda et al. (2006)
-Metridia ornata,C5F,2500,1.5,0.4,1.906,0.162,0.9,Ikeda et al. (2006)
-Metridia ornata,C6F,1500,2,0.241,2.9,0.232,1.5,Ikeda et al. (2006)
-Metridia ornata,C6F,2500,1.5,0.276,1.267,0.102,0.6,Ikeda et al. (2006)
-Metridia ornata,C6M,2500,1.5,0.226,0.868,0.072,0.4,Ikeda et al. (2006)
-Metridia ornata,C6M,2500,1.5,0.191,0.818,0.063,0.4,Ikeda et al. (2006)
-Mixtocalanus robstus,C6F,750,3,0.774,1.008,0.112,0.5,Ikeda et al. (2006)
-Onchocalanus magnus,C5F,1500,2,0.983,6.596,0.479,4,Ikeda et al. (2006)
-Onchocalanus magnus,C6F,1500,2,1.131,5.77,0.421,2.8,Ikeda et al. (2006)
-Pachyptilus pacificus,C6F,750,3,0.463,2.065,0.129,0.9,Ikeda et al. (2006)
-Pachyptilus pacificus,C6F,1500,2,0.157,2.41,0.182,1.1,Ikeda et al. (2006)
-Pachyptilus pacificus,C6F,2500,1.5,0.136,2.724,0.188,1.2,Ikeda et al. (2006)
-Paraeuchaeta barbata,C6F,750,3,0.703,3.862,0.246,2.4,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C5F,750,3,0.448,1.793,0.131,1,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C5M,750,3,0.366,1.351,0.095,0.8,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C5M,1500,2,0.34,3.527,0.279,2.2,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6F,750,3,0.796,4.852,0.363,2.8,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6F,1500,2,0.49,4.217,0.299,2.4,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6F,1500,2,0.812,4.46,0.34,2.6,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6F,2500,1.5,1.787,8.892,0.774,4.9,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6M,1500,2,0.6,2.472,0.187,1.5,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6M,1500,2,0.35,2.455,0.185,1.5,Ikeda et al. (2006)
-Paraeuchaeta birostrata,C6M,2500,1.5,0.556,2.155,0.148,1.3,Ikeda et al. (2006)
-Paraeuchaeta brevirostris,C6F,750,3,1.009,4.969,0.357,2.9,Ikeda et al. (2006)
-Paraeuchaeta brevirostris,C6F,1500,2,0.668,4.808,0.365,2.9,Ikeda et al. (2006)
-Paraeuchaeta elongata,C4F,750,3,0.244,0.939,0.066,0.6,Ikeda et al. (2006)
-Paraeuchaeta elongata,C4M,750,3,0.176,0.714,0.052,0.4,Ikeda et al. (2006)
-Paraeuchaeta elongata,C5F,750,3,0.286,1.192,0.083,0.7,Ikeda et al. (2006)
-Paraeuchaeta elongata,C5F,750,3,0.55,2.38,0.174,1.4,Ikeda et al. (2006)
-Paraeuchaeta elongata,C5F,1500,2,0.74,2.13,0.188,1.1,Ikeda et al. (2006)
-Paraeuchaeta elongata,C5M,750,3,0.314,1.122,0.079,0.7,Ikeda et al. (2006)
-Paraeuchaeta elongata,C5M,750,3,0.261,1.245,0.096,0.7,Ikeda et al. (2006)
-Paraeuchaeta elongata,C5M,1500,2,0.445,2.152,0.173,1.3,Ikeda et al. (2006)
-Paraeuchaeta elongata,C6F,750,3,0.846,5.715,0.384,3.4,Ikeda et al. (2006)
-Paraeuchaeta elongata,C6F,750,3,1.03,1.943,0.185,1,Ikeda et al. (2006)
-Paraeuchaeta modesta,C6F,750,3,1.08,3.867,0.287,2.3,Ikeda et al. (2006)
-Paraeuchaeta orientalis,C6F,750,3,1.617,8.557,0.529,4.7,Ikeda et al. (2006)
-Paraeuchaeta pseudotumidula,C6F,750,3,0.796,2.585,0.173,1.5,Ikeda et al. (2006)
-Paraeuchaeta pseudotumidula,C6F,1500,2,0.634,2.977,0.215,1.7,Ikeda et al. (2006)
-Paraeuchaeta pseudotumidula,C6F,2500,1.5,0.31,1.157,0.09,0.7,Ikeda et al. (2006)
-Paraeuchaeta pseudotumidula,C6M,750,3,0.54,2.272,0.171,1.3,Ikeda et al. (2006)
-Paraeuchaeta rubra,C5F,1500,2,0.39,1.904,0.17,1.1,Ikeda et al. (2006)
-Paraeuchaeta rubra,C5F,2500,1.5,0.264,2.125,0.149,1.2,Ikeda et al. (2006)
-Paraeuchaeta rubra,C5M,750,3,0.491,1.902,0.132,1.1,Ikeda et al. (2006)
-Paraeuchaeta rubra,C5M,1500,2,0.25,2.098,0.157,1.3,Ikeda et al. (2006)
-Paraeuchaeta rubra,C5M,2500,1.5,0.269,2.64,0.175,1.6,Ikeda et al. (2006)
-Paraeuchaeta rubra,C6F,750,3,0.58,3.498,0.273,2,Ikeda et al. (2006)
-Paraeuchaeta rubra,C6F,1500,2,0.66,4.625,0.293,2.6,Ikeda et al. (2006)
-Paraeuchaeta rubra,C6F,2500,1.5,0.839,4.638,0.339,2.8,Ikeda et al. (2006)
-Paraeuchaeta rubra,C6M,1500,2,0.238,1.65,0.124,1.1,Ikeda et al. (2006)
-Pleuromamma scutullata,C6F,750,3,0.276,0.429,0.031,0.2,Ikeda et al. (2006)
-Pleuromamma scutullata,C6M,750,3,0.316,0.564,0.067,0.3,Ikeda et al. (2006)
-Pleuromamma xiphias,C6F,750,3,0.472,0.563,0.067,0.2,Ikeda et al. (2006)
-Pseudochirella pacifica,C5,2500,1.5,1.495,4.074,0.331,2.2,Ikeda et al. (2006)
-Pseudochirella pacifica,C5F,1500,2,0.513,1.945,0.15,1.1,Ikeda et al. (2006)
-Pseudochirella pacifica,C5F,1500,2,0.6,1.637,0.144,0.9,Ikeda et al. (2006)
-Pseudochirella pacifica,C5M,750,3,0.488,0.7,0.071,0.3,Ikeda et al. (2006)
-Pseudochirella pacifica,C5M,1500,2,0.43,0.554,0.051,0.3,Ikeda et al. (2006)
-Pseudochirella pacifica,C6F,2500,1.5,1,2.772,0.31,1.2,Ikeda et al. (2006)
-Pseudochirella polyspina,C5F,2500,1.5,0.156,1.085,0.07,0.6,Ikeda et al. (2006)
-Pseudochirella polyspina,C6F,1500,2,0.85,2.525,0.263,1.2,Ikeda et al. (2006)
-Pseudochirella polyspina,C6F,1500,2,0.645,3.057,0.291,1.6,Ikeda et al. (2006)
-Pseudochirella polyspina,C6F,2500,1.5,0.89,2.688,0.256,1.3,Ikeda et al. (2006)
-Pseudochirella polyspina,C6F,2500,1.5,1.762,4.146,0.452,2,Ikeda et al. (2006)
-Pseudochirella polyspina,C6F,2500,1.5,0.922,2.533,0.261,1.3,Ikeda et al. (2006)
-Pseudochirella spinifera,C5F,1500,2,0.422,1.79,0.147,1,Ikeda et al. (2006)
-Pseudochirella spinifera,C5M,750,3,0.583,1.592,0.125,0.9,Ikeda et al. (2006)
-Pseudochirella spinifera,C5M,750,3,0.632,1.275,0.109,0.7,Ikeda et al. (2006)
-Pseudochirella spinifera,C5M,2500,1.5,0.935,3.639,0.235,2.2,Ikeda et al. (2006)
-Pseudochirella spinifera,C6M,1500,2,0.176,1.2,0.108,0.6,Ikeda et al. (2006)
-Pseudochirella spinifera,C6M,1500,2,0.29,1.363,0.102,0.8,Ikeda et al. (2006)
-Scaphocalanus affinis,C5F,2500,1.5,0.503,2.577,0.142,1.6,Ikeda et al. (2006)
-Scaphocalanus affinis,C6F,2500,1.5,0.373,1.524,0.137,0.8,Ikeda et al. (2006)
-Scaphocalanus magnus,C6F,1500,2,0.44,1.166,0.116,0.6,Ikeda et al. (2006)
-Scaphocalanus medius,C6F,750,3,0.411,1.062,0.079,0.6,Ikeda et al. (2006)
-Scaphocalanus medius,C6F,1500,2,0.263,1.115,0.08,0.7,Ikeda et al. (2006)
-Scolecithricella sp.,C6F,2500,1.5,0.135,0.447,0.038,0.2,Ikeda et al. (2006)
-Scottocalanus securifrons,C6F,1500,2,0.537,1.452,0.163,0.7,Ikeda et al. (2006)
-Scottocalanus securifrons,C6F,2500,1.5,1.162,5.64,0.486,3.1,Ikeda et al. (2006)
-Spinocalanus magnus,C6F,2500,1.5,0.232,0.868,0.061,0.5,Ikeda et al. (2006)
-Spinocalanus stellatus,C6F,750,3,0.503,0.818,0.059,0.4,Ikeda et al. (2006)
-Undeuchaeta major,C5F,2500,1.5,0.082,0.445,0.045,0.2,Ikeda et al. (2006)
-Undeuchaeta major,C6F,1500,2,0.834,3.35,0.271,1.7,Ikeda et al. (2006)
-Undeuchaeta major,C6F,1500,2,0.706,2.477,0.258,1.2,Ikeda et al. (2006)
-Undeuchaeta plumosa,C6F,750,3,1.273,3.332,0.322,1.7,Ikeda et al. (2006)
-Undeuchaeta plumosa,C6F,1500,2,1.128,2.82,0.275,1.4,Ikeda et al. (2006)
-Xanthocalanus kurilensis,C6F,2500,1.5,0.109,1.041,0.094,0.6,Ikeda et al. (2006)
-Acartia australis,,2,25,0.055,0.009,0.001,0,Ikeda et al. (2001)
-Acartia clausi,,2,14.8,0.03,0.009,0.001,0,Ikeda et al. (2001)
-Acartia longiremis,,2,9.6,0.028,0.008,0.001,0,Ikeda et al. (2001)
-Acartia pacifica,,2,26,0.046,0.008,0.001,0,Ikeda et al. (2001)
-Acartia tonsa,,2,22,0.056,0.007,0.001,0,Ikeda et al. (2001)
-Calanoides acutus,C4.5,2,-0.6,0.163,0.266,0.021,0.1,Ikeda et al. (2001)
-Calanoides acutus,C5,2,-0.2,0.211,0.394,0.034,0.2,Ikeda et al. (2001)
-Calanopia elliptica,,2,26,0.28,0.056,0.005,0,Ikeda et al. (2001)
-Calanus finmarchicus,C6F,2,0.1,0.328,0.387,0.029,0.2,Ikeda et al. (2001)
-Calanus glacialis,C6F,21,1.9,0.616,0.474,0.05,0.2,Ikeda et al. (2001)
-Calanus hyperboreus,C5,50,-0.3,1.054,2.677,0.18,1.6,Ikeda et al. (2001)
-Calanus hyperboreus,C5,50,0.9,1.028,1.943,0.144,1.1,Ikeda et al. (2001)
-Calanus hyperboreus,C6F,50,1.3,1.485,3.95,0.282,2.3,Ikeda et al. (2001)
-Calanus propinquus,,2,-1,1.179,1.042,0.13,0.5,Ikeda et al. (2001)
-Centropages abdominalis,,2,15.9,0.086,0.017,0.002,0,Ikeda et al. (2001)
-Centropages brachiatus,,2,17.3,0.115,0.02,0.002,0,Ikeda et al. (2001)
-Eucalanus attenuatus,,2,27.4,0.905,0.137,0.013,0.1,Ikeda et al. (2001)
-Eucalanus bungii,,2,6,0.795,1.01,0.099,0.4,Ikeda et al. (2001)
-Eucalanus subcrassus,,2,24,0.655,0.104,0.01,0,Ikeda et al. (2001)
-Euchaeta marina,,2,24,1.337,0.29,0.028,0.1,Ikeda et al. (2001)
-Labidocera acuta,,2,24,1.89,0.233,0.022,0.1,Ikeda et al. (2001)
-Labidocera acuta,,2,28.5,2.07,0.232,0.028,0.1,Ikeda et al. (2001)
-Labidocera nerii,,2,26.4,1.515,0.221,0.027,0.1,Ikeda et al. (2001)
-Mesocalanus tenuicornis,,2,15.8,0.22,0.031,0.004,0,Ikeda et al. (2001)
-Metridia gerlachei,,2,-1.4,0.32,0.265,0.03,0.1,Ikeda et al. (2001)
-Metridia longa,C6F,50,0.1,0.406,0.353,0.037,0.2,Ikeda et al. (2001)
-Metridia pacifica,,2,8.2,0.382,0.148,0.016,0.1,Ikeda et al. (2001)
-Metridia pacifica,,2,13,0.274,0.094,0.011,0,Ikeda et al. (2001)
-Nannocalanus minor,,2,26.9,0.21,0.04,0.004,0,Ikeda et al. (2001)
-Neocalanus cristatus,C5,2,6.3,1.67,1.587,0.133,0.8,Ikeda et al. (2001)
-Neocalanus gracilis,,2,19.7,1.64,0.5,0.051,0.2,Ikeda et al. (2001)
-Neocalanus plumchrus,C4,2,5.6,0.28,0.263,0.021,0.1,Ikeda et al. (2001)
-Neocalanus plumchrus,C5,2,7.3,0.68,0.785,0.063,0.5,Ikeda et al. (2001)
-Neocalanus plumchrus,,2,15.1,0.555,0.294,0.026,0.1,Ikeda et al. (2001)
-Paracalanus parvus,,2,13.9,0.031,0.004,0,0,Ikeda et al. (2001)
-Pontella danae,,2,26.4,3.43,0.7,0.084,0.3,Ikeda et al. (2001)
-Pseudocalanus elongatus,,2,8.6,0.04,0.012,0.001,0,Ikeda et al. (2001)
-Pseudodiaptomus marinus,,2,14.3,0.056,0.014,0.002,0,Ikeda et al. (2001)
-Rhincalanus gigas,,50,-1.7,0.437,1.08,0.106,0.5,Ikeda et al. (2001)
-Tortanus discaudatus,,2,7,0.12,0.057,0.006,0,Ikeda et al. (2001)
-Tortanus gracilis,,2,26,0.143,0.024,0.002,0,Ikeda et al. (2001)
-Undinula vulgaris,,2,23.5,0.966,0.185,0.018,0.1,Ikeda et al. (2001)
-Undinula vulgaris,,2,27.6,1.399,0.167,0.018,0.1,Ikeda et al. (2001)
-Neocalanus cristatus,C5,25,5,1,1.72,0.165,0.7,Ikeda et al. (2004)
+﻿No.,Species,Stage,Depth.water..m.,Treat.temp....C.,O2.Sat,Resp.O2.ind...µl...h.,BM.dry..mg.,BM.N..mg.,BM.C..mg.,Ref.data,Location
+1,Pachyptilus pacificus,C6F,750,3,0.13,0.463,2.065,0.129,0.892,Ikeda et al. (2006),Variable or Unknown
+2,Lucicutia bicornuta,C6M,750,3,0.13,0.121,0.625,0.05,0.253,Ikeda et al. (2006),Variable or Unknown
+3,Lucicutia grandis,C5F,750,3,0.13,0.113,0.429,0.032,0.188,Ikeda et al. (2006),Variable or Unknown
+4,Metridia asymmetrica,C6F,750,3,0.13,0.175,0.457,0.033,0.242,Ikeda et al. (2006),Variable or Unknown
+5,Metridia curticauda,C6F,750,3,0.13,0.141,0.484,0.034,0.27,Ikeda et al. (2006),Variable or Unknown
+6,Metridia okhotensis,C6F,750,3,0.13,0.292,0.713,0.05,0.429,Ikeda et al. (2006),Variable or Unknown
+7,Pleuromamma scutullata,C6M,750,3,0.13,0.316,0.564,0.067,0.251,Ikeda et al. (2006),Variable or Unknown
+8,Pleuromamma scutullata,C6F,750,3,0.13,0.276,0.429,0.031,0.218,Ikeda et al. (2006),Variable or Unknown
+9,Pleuromamma xiphias,C6F,750,3,0.13,0.472,0.563,0.067,0.24,Ikeda et al. (2006),Variable or Unknown
+10,Candacia columbiae,C6M,750,3,0.13,0.231,0.435,0.05,0.179,Ikeda et al. (2006),Variable or Unknown
+11,Aetideopsis rostrata,C5M,750,3,0.13,0.397,0.762,0.08,0.335,Ikeda et al. (2006),Variable or Unknown
+12,Chiridius pacificus,C6F,750,3,0.13,0.42,0.692,0.08,0.316,Ikeda et al. (2006),Variable or Unknown
+13,Chirundina streetsi,C6F,750,3,0.13,0.787,1.237,0.158,0.538,Ikeda et al. (2006),Variable or Unknown
+14,Euchirella brevis,C6F,750,3,0.13,0.51,0.952,0.084,0.506,Ikeda et al. (2006),Variable or Unknown
+15,Euchirella galeata,C6F,750,3,0.13,1.139,2.459,0.28,1.126,Ikeda et al. (2006),Variable or Unknown
+16,Euchirella messinensis,C6F,750,3,0.13,1.02,1.917,0.215,0.863,Ikeda et al. (2006),Variable or Unknown
+17,Euchirella rostrata,C6F,750,3,0.13,0.558,0.93,0.086,0.455,Ikeda et al. (2006),Variable or Unknown
+18,Euchirella truncata,C4M,750,3,0.13,0.086,0.517,0.054,0.241,Ikeda et al. (2006),Variable or Unknown
+19,Gaidius brevispinus,C6F,750,3,0.13,0.432,0.914,0.077,0.439,Ikeda et al. (2006),Variable or Unknown
+20,Gaidius brevispinus,C6F,750,3,0.13,0.362,0.949,0.104,0.419,Ikeda et al. (2006),Variable or Unknown
+21,Gaidius robustus,C4F,750,3,0.13,0.228,0.381,0.041,0.18,Ikeda et al. (2006),Variable or Unknown
+22,Gaidius tenuispinus,C5F,750,3,0.13,0.77,1.238,0.117,0.624,Ikeda et al. (2006),Variable or Unknown
+23,Gaidius tenuispinus,C6F,750,3,0.13,0.251,0.436,0.053,0.197,Ikeda et al. (2006),Variable or Unknown
+24,Gaidius variabilis,C5M,750,3,0.13,0.237,0.488,0.051,0.223,Ikeda et al. (2006),Variable or Unknown
+25,Gaidius variabilis,C5F,750,3,0.13,0.225,0.323,0.034,0.13,Ikeda et al. (2006),Variable or Unknown
+26,Gaidius variabilis,C6F,750,3,0.13,0.295,0.509,0.055,0.243,Ikeda et al. (2006),Variable or Unknown
+27,Pseudochirella pacifica,C5M,750,3,0.13,0.488,0.7,0.071,0.296,Ikeda et al. (2006),Variable or Unknown
+28,Pseudochirella spinifera,C5M,750,3,0.13,0.583,1.592,0.125,0.923,Ikeda et al. (2006),Variable or Unknown
+29,Pseudochirella spinifera,C5M,750,3,0.13,0.632,1.275,0.109,0.687,Ikeda et al. (2006),Variable or Unknown
+30,Undeuchaeta plumosa,C6F,750,3,0.13,1.273,3.332,0.322,1.696,Ikeda et al. (2006),Variable or Unknown
+31,Paraeuchaeta barbata,C6F,750,3,0.13,0.703,3.862,0.246,2.394,Ikeda et al. (2006),Variable or Unknown
+32,Paraeuchaeta birostrata,C5M,750,3,0.13,0.366,1.351,0.095,0.762,Ikeda et al. (2006),Variable or Unknown
+33,Paraeuchaeta birostrata,C5F,750,3,0.13,0.448,1.793,0.131,1.038,Ikeda et al. (2006),Variable or Unknown
+34,Paraeuchaeta birostrata,C6F,750,3,0.13,0.796,4.852,0.363,2.834,Ikeda et al. (2006),Variable or Unknown
+35,Paraeuchaeta brevirostris,C6F,750,3,0.13,1.009,4.969,0.357,2.877,Ikeda et al. (2006),Variable or Unknown
+36,Paraeuchaeta elongata,C4M,750,3,0.13,0.176,0.714,0.052,0.407,Ikeda et al. (2006),Variable or Unknown
+37,Paraeuchaeta elongata,C4F,750,3,0.13,0.244,0.939,0.066,0.55,Ikeda et al. (2006),Variable or Unknown
+38,Paraeuchaeta elongata,C5M,750,3,0.13,0.314,1.122,0.079,0.66,Ikeda et al. (2006),Variable or Unknown
+39,Paraeuchaeta elongata,C5M,750,3,0.13,0.261,1.245,0.096,0.684,Ikeda et al. (2006),Variable or Unknown
+40,Paraeuchaeta elongata,C5F,750,3,0.13,0.286,1.192,0.083,0.653,Ikeda et al. (2006),Variable or Unknown
+41,Paraeuchaeta elongata,C5F,750,3,0.13,0.55,2.38,0.174,1.383,Ikeda et al. (2006),Variable or Unknown
+42,Paraeuchaeta elongata,C6F,750,3,0.13,0.846,5.715,0.384,3.412,Ikeda et al. (2006),Variable or Unknown
+43,Paraeuchaeta elongata,C6F,750,3,0.13,1.03,1.943,0.185,0.999,Ikeda et al. (2006),Variable or Unknown
+44,Paraeuchaeta modesta,C6F,750,3,0.13,1.08,3.867,0.287,2.27,Ikeda et al. (2006),Variable or Unknown
+45,Paraeuchaeta orientalis,C6F,750,3,0.13,1.617,8.557,0.529,4.723,Ikeda et al. (2006),Variable or Unknown
+46,Paraeuchaeta pseudotumidula,C6M,750,3,0.13,0.54,2.272,0.171,1.331,Ikeda et al. (2006),Variable or Unknown
+47,Paraeuchaeta pseudotumidula,C6F,750,3,0.13,0.796,2.585,0.173,1.543,Ikeda et al. (2006),Variable or Unknown
+48,Paraeuchaeta rubra,C5M,750,3,0.13,0.491,1.902,0.1316,1.143,Ikeda et al. (2006),Variable or Unknown
+49,Paraeuchaeta rubra,C6F,750,3,0.13,0.58,3.498,0.2728,1.959,Ikeda et al. (2006),Variable or Unknown
+50,Amallothrix valida,C5M,750,3,0.13,0.281,0.684,0.0548,0.384,Ikeda et al. (2006),Variable or Unknown
+51,Amallothrix valida,C6F,750,3,0.13,0.562,0.872,0.0942,0.416,Ikeda et al. (2006),Variable or Unknown
+52,Mixtocalanus robstus,C6F,750,3,0.13,0.774,1.008,0.1119,0.475,Ikeda et al. (2006),Variable or Unknown
+53,Scaphocalanus medius,C6F,750,3,0.13,0.411,1.062,0.0787,0.609,Ikeda et al. (2006),Variable or Unknown
+54,Spinocalanus stellatus,C6F,750,3,0.13,0.503,0.818,0.0592,0.356,Ikeda et al. (2006),Variable or Unknown
+55,Pachyptilus pacificus,C6F,1500,2,0.2,0.157,2.41,0.1824,1.125,Ikeda et al. (2006),Variable or Unknown
+56,Lucicutia bicornuta,C6F,1500,2,0.2,0.247,1.017,0.0755,0.537,Ikeda et al. (2006),Variable or Unknown
+57,Lucicutia grandis,C6M,1500,2,0.2,0.408,2.192,0.1903,1.19,Ikeda et al. (2006),Variable or Unknown
+58,Lucicutia pacifica,C6F,1500,2,0.2,0.268,1.81,0.1314,0.853,Ikeda et al. (2006),Variable or Unknown
+59,Lucicutia pacifica,C6F,1500,2,0.2,0.451,1.634,0.1186,0.77,Ikeda et al. (2006),Variable or Unknown
+60,Metridia asymmetrica,C6F,1500,2,0.2,0.046,0.36,0.0271,0.188,Ikeda et al. (2006),Variable or Unknown
+61,Metridia asymmetrica,C6F,1500,2,0.2,0.077,0.344,0.0249,0.162,Ikeda et al. (2006),Variable or Unknown
+62,Metridia curticauda,C6F,1500,2,0.2,0.066,0.99,0.0729,0.471,Ikeda et al. (2006),Variable or Unknown
+63,Metridia ornata,C6F,1500,2,0.2,0.241,2.9,0.232,1.465,Ikeda et al. (2006),Variable or Unknown
+64,Aetideopsis rostrata,C5M,1500,2,0.2,0.42,1.84,0.106,0.96,Ikeda et al. (2006),Variable or Unknown
+65,Aetideopsis rostrata,C5F,1500,2,0.2,0.122,0.707,0.0578,0.369,Ikeda et al. (2006),Variable or Unknown
+66,Bradyidius pacificus,C5M,1500,2,0.2,0.225,0.89,0.0779,0.451,Ikeda et al. (2006),Variable or Unknown
+67,Euchirella rostrata,C6F,1500,2,0.2,0.242,0.804,0.09,0.356,Ikeda et al. (2006),Variable or Unknown
+68,Euchirella rostrata,C6F,1500,2,0.2,0.511,0.82,0.1025,0.344,Ikeda et al. (2006),Variable or Unknown
+69,Gaidius brevispinus,C6F,1500,2,0.2,0.27,0.971,0.099,0.425,Ikeda et al. (2006),Variable or Unknown
+70,Gaidius variabilis,C6F,1500,2,0.2,0.187,0.672,0.0672,0.296,Ikeda et al. (2006),Variable or Unknown
+71,Gaidius variabilis,C6F,1500,2,0.2,0.3,0.935,0.1,0.43,Ikeda et al. (2006),Variable or Unknown
+72,Pseudochirella pacifica,C5M,1500,2,0.2,0.43,0.554,0.0514,0.294,Ikeda et al. (2006),Variable or Unknown
+73,Pseudochirella pacifica,C5F,1500,2,0.2,0.513,1.945,0.1502,1.05,Ikeda et al. (2006),Variable or Unknown
+74,Pseudochirella pacifica,C5F,1500,2,0.2,0.6,1.637,0.1445,0.925,Ikeda et al. (2006),Variable or Unknown
+75,Pseudochirella polyspina,C6F,1500,2,0.2,0.85,2.525,0.2626,1.167,Ikeda et al. (2006),Variable or Unknown
+76,Pseudochirella polyspina,C6F,1500,2,0.2,0.645,3.057,0.291,1.623,Ikeda et al. (2006),Variable or Unknown
+77,Pseudochirella spinifera,C5F,1500,2,0.2,0.422,1.79,0.1475,0.977,Ikeda et al. (2006),Variable or Unknown
+78,Pseudochirella spinifera,C6M,1500,2,0.2,0.176,1.2,0.1081,0.64,Ikeda et al. (2006),Variable or Unknown
+79,Pseudochirella spinifera,C6M,1500,2,0.2,0.29,1.363,0.1022,0.837,Ikeda et al. (2006),Variable or Unknown
+80,Undeuchaeta major,C6F,1500,2,0.2,0.834,3.35,0.271,1.745,Ikeda et al. (2006),Variable or Unknown
+81,Undeuchaeta major,C6F,1500,2,0.2,0.706,2.477,0.2576,1.241,Ikeda et al. (2006),Variable or Unknown
+82,Undeuchaeta plumosa,C6F,1500,2,0.2,1.128,2.82,0.2752,1.449,Ikeda et al. (2006),Variable or Unknown
+83,Paraeuchaeta birostrata,C5M,1500,2,0.2,0.34,3.527,0.2793,2.155,Ikeda et al. (2006),Variable or Unknown
+84,Paraeuchaeta birostrata,C6M,1500,2,0.2,0.6,2.472,0.1869,1.523,Ikeda et al. (2006),Variable or Unknown
+85,Paraeuchaeta birostrata,C6M,1500,2,0.2,0.35,2.455,0.1846,1.488,Ikeda et al. (2006),Variable or Unknown
+86,Paraeuchaeta birostrata,C6F,1500,2,0.2,0.49,4.217,0.2986,2.387,Ikeda et al. (2006),Variable or Unknown
+87,Paraeuchaeta birostrata,C6F,1500,2,0.2,0.812,4.46,0.3403,2.649,Ikeda et al. (2006),Variable or Unknown
+88,Paraeuchaeta brevirostris,C6F,1500,2,0.2,0.668,4.808,0.3649,2.866,Ikeda et al. (2006),Variable or Unknown
+89,Paraeuchaeta elongata,C5M,1500,2,0.2,0.445,2.152,0.173,1.259,Ikeda et al. (2006),Variable or Unknown
+90,Paraeuchaeta elongata,C5F,1500,2,0.2,0.74,2.13,0.1879,1.125,Ikeda et al. (2006),Variable or Unknown
+91,Paraeuchaeta pseudotumidula,C6F,1500,2,0.2,0.634,2.977,0.2152,1.712,Ikeda et al. (2006),Variable or Unknown
+92,Paraeuchaeta rubra,C5M,1500,2,0.2,0.25,2.098,0.1569,1.276,Ikeda et al. (2006),Variable or Unknown
+93,Paraeuchaeta rubra,C5F,1500,2,0.2,0.39,1.904,0.17,1.144,Ikeda et al. (2006),Variable or Unknown
+94,Paraeuchaeta rubra,C6M,1500,2,0.2,0.238,1.65,0.1241,1.096,Ikeda et al. (2006),Variable or Unknown
+95,Paraeuchaeta rubra,C6F,1500,2,0.2,0.66,4.625,0.293,2.636,Ikeda et al. (2006),Variable or Unknown
+96,Cornucalanus indicus,C5F,1500,2,0.2,0.962,3.55,0.2989,1.818,Ikeda et al. (2006),Variable or Unknown
+97,Cornucalanus indicus,C6F,1500,2,0.2,1.017,6.919,0.5494,3.812,Ikeda et al. (2006),Variable or Unknown
+98,Onchocalanus magnus,C5F,1500,2,0.2,0.983,6.596,0.4789,3.971,Ikeda et al. (2006),Variable or Unknown
+99,Onchocalanus magnus,C6F,1500,2,0.2,1.131,5.77,0.4206,2.827,Ikeda et al. (2006),Variable or Unknown
+100,Amallothrix inornata,C6M,1500,2,0.2,0.166,0.524,0.0422,0.291,Ikeda et al. (2006),Variable or Unknown
+101,Amallothrix inornata,C5M,1500,2,0.2,0.363,0.912,0.0658,0.553,Ikeda et al. (2006),Variable or Unknown
+102,Amallothrix inornata,C6F,1500,2,0.2,0.21,0.946,0.0759,0.522,Ikeda et al. (2006),Variable or Unknown
+103,Amallothrix paravalida,C6F,1500,2,0.2,0.26,0.664,0.0473,0.369,Ikeda et al. (2006),Variable or Unknown
+104,Amallothrix valida,C5F,1500,2,0.2,0.287,1,0.0748,0.568,Ikeda et al. (2006),Variable or Unknown
+105,Amallothrix valida,C6F,1500,2,0.2,0.316,1.094,0.0788,0.66,Ikeda et al. (2006),Variable or Unknown
+106,Lophothrix frontalis,C6F,1500,2,0.2,0.922,3.19,0.3031,1.451,Ikeda et al. (2006),Variable or Unknown
+107,Lophothrix frontalis,C6F,1500,2,0.2,0.607,1.416,0.1284,0.797,Ikeda et al. (2006),Variable or Unknown
+108,Scaphocalanus magnus,C6F,1500,2,0.2,0.44,1.166,0.1159,0.596,Ikeda et al. (2006),Variable or Unknown
+109,Scaphocalanus medius,C6F,1500,2,0.2,0.263,1.115,0.0798,0.682,Ikeda et al. (2006),Variable or Unknown
+110,Scottocalanus securifrons,C6F,1500,2,0.2,0.537,1.452,0.1626,0.716,Ikeda et al. (2006),Variable or Unknown
+111,Bathycalanus bradyi,C6F,1500,2,0.2,4.17,34.49,2.3798,21.798,Ikeda et al. (2006),Variable or Unknown
+112,Euaugaptilus pseudaffinis,C6F,2500,1.5,0.32,0.202,1.681,0.1273,0.884,Ikeda et al. (2006),Variable or Unknown
+113,Pachyptilus pacificus,C6F,2500,1.5,0.32,0.136,2.724,0.1882,1.22,Ikeda et al. (2006),Variable or Unknown
+114,Heterostylites major,C6F,2500,1.5,0.32,0.162,0.528,0.0495,0.228,Ikeda et al. (2006),Variable or Unknown
+115,Lucicutia ellipsoidalis,C6F,2500,1.5,0.32,0.271,0.777,0.049,0.412,Ikeda et al. (2006),Variable or Unknown
+116,Lucicutia grandis,C6M,2500,1.5,0.32,0.157,1.528,0.0935,0.877,Ikeda et al. (2006),Variable or Unknown
+117,Lucicutia grandis,C6F,2500,1.5,0.32,0.238,1.398,0.0931,0.717,Ikeda et al. (2006),Variable or Unknown
+118,Lucicutia longifurca,C5,2500,1.5,0.32,0.122,1.189,0.0949,0.6,Ikeda et al. (2006),Variable or Unknown
+119,Lucicutia longifurca,C6M,2500,1.5,0.32,0.291,1.534,0.0923,0.913,Ikeda et al. (2006),Variable or Unknown
+120,Lucicutia pacifica,C6F,2500,1.5,0.32,0.271,1.705,0.132,0.856,Ikeda et al. (2006),Variable or Unknown
+121,Metridia asymmetrica,C6F,2500,1.5,0.32,0.083,0.425,0.0317,0.23,Ikeda et al. (2006),Variable or Unknown
+122,Metridia asymmetrica,C6F,2500,1.5,0.32,0.138,0.453,0.0369,0.25,Ikeda et al. (2006),Variable or Unknown
+123,Metridia ornata,C5F,2500,1.5,0.32,0.4,1.906,0.162,0.93,Ikeda et al. (2006),Variable or Unknown
+124,Metridia ornata,C6M,2500,1.5,0.32,0.226,0.868,0.0717,0.422,Ikeda et al. (2006),Variable or Unknown
+125,Metridia ornata,C6M,2500,1.5,0.32,0.191,0.818,0.0627,0.402,Ikeda et al. (2006),Variable or Unknown
+126,Metridia ornata,C6F,2500,1.5,0.32,0.276,1.267,0.1022,0.646,Ikeda et al. (2006),Variable or Unknown
+127,Gaetanus paracurvicornis,C6F,2500,1.5,0.32,0.222,0.735,0.0694,0.343,Ikeda et al. (2006),Variable or Unknown
+128,Gaidius robustus,C5M,2500,1.5,0.32,0.251,0.708,0.0678,0.301,Ikeda et al. (2006),Variable or Unknown
+129,Gaidius robustus,C5M,2500,1.5,0.32,0.785,3.444,0.2094,2.17,Ikeda et al. (2006),Variable or Unknown
+130,Gaidius robustus,C5M,2500,1.5,0.32,0.346,1.261,0.1042,0.463,Ikeda et al. (2006),Variable or Unknown
+131,Gaidius robustus,C6F,2500,1.5,0.32,1.322,7.03,0.6721,3.494,Ikeda et al. (2006),Variable or Unknown
+132,Gaidius variabilis,C5F,2500,1.5,0.32,0.258,0.835,0.0852,0.416,Ikeda et al. (2006),Variable or Unknown
+133,Gaidius variabilis,C6F,2500,1.5,0.32,0.155,1.316,0.1017,0.738,Ikeda et al. (2006),Variable or Unknown
+134,Pseudochirella pacifica,C5,2500,1.5,0.32,1.495,4.074,0.3312,2.151,Ikeda et al. (2006),Variable or Unknown
+135,Pseudochirella pacifica,C6F,2500,1.5,0.32,1,2.772,0.3105,1.239,Ikeda et al. (2006),Variable or Unknown
+136,Pseudochirella polyspina,C5F,2500,1.5,0.32,0.156,1.085,0.0697,0.589,Ikeda et al. (2006),Variable or Unknown
+137,Pseudochirella polyspina,C6F,2500,1.5,0.32,0.89,2.688,0.2556,1.333,Ikeda et al. (2006),Variable or Unknown
+138,Pseudochirella polyspina,C6F,2500,1.5,0.32,1.762,4.146,0.4519,2.019,Ikeda et al. (2006),Variable or Unknown
+139,Pseudochirella polyspina,C6F,2500,1.5,0.32,0.922,2.533,0.2609,1.251,Ikeda et al. (2006),Variable or Unknown
+140,Pseudochirella spinifera,C5M,2500,1.5,0.32,0.935,3.639,0.2351,2.202,Ikeda et al. (2006),Variable or Unknown
+141,Undeuchaeta major,C5F,2500,1.5,0.32,0.082,0.445,0.0454,0.21,Ikeda et al. (2006),Variable or Unknown
+142,Paraeuchaeta birostrata,C6M,2500,1.5,0.32,0.556,2.155,0.1476,1.297,Ikeda et al. (2006),Variable or Unknown
+143,Paraeuchaeta birostrata,C6F,2500,1.5,0.32,1.787,8.892,0.7745,4.917,Ikeda et al. (2006),Variable or Unknown
+144,Paraeuchaeta pseudotumidula,C6F,2500,1.5,0.32,0.31,1.157,0.0899,0.702,Ikeda et al. (2006),Variable or Unknown
+145,Paraeuchaeta rubra,C5M,2500,1.5,0.32,0.269,2.64,0.1753,1.632,Ikeda et al. (2006),Variable or Unknown
+146,Paraeuchaeta rubra,C5F,2500,1.5,0.32,0.264,2.125,0.1494,1.245,Ikeda et al. (2006),Variable or Unknown
+147,Paraeuchaeta rubra,C6F,2500,1.5,0.32,0.839,4.638,0.3386,2.843,Ikeda et al. (2006),Variable or Unknown
+148,Xanthocalanus kurilensis,C6F,2500,1.5,0.32,0.109,1.041,0.0937,0.579,Ikeda et al. (2006),Variable or Unknown
+149,Amallothrix inornata,C6F,2500,1.5,0.32,0.433,0.803,0.0835,0.391,Ikeda et al. (2006),Variable or Unknown
+150,Amallothrix inornata,C6F,2500,1.5,0.32,0.369,1.029,0.107,0.546,Ikeda et al. (2006),Variable or Unknown
+151,Scaphocalanus affinis,C5F,2500,1.5,0.32,0.503,2.577,0.1425,1.649,Ikeda et al. (2006),Variable or Unknown
+152,Scaphocalanus affinis,C6F,2500,1.5,0.32,0.373,1.524,0.1372,0.823,Ikeda et al. (2006),Variable or Unknown
+153,Scolecithricella sp.,C6F,2500,1.5,0.32,0.135,0.447,0.0384,0.229,Ikeda et al. (2006),Variable or Unknown
+154,Scottocalanus securifrons,C6F,2500,1.5,0.32,1.162,5.64,0.4856,3.141,Ikeda et al. (2006),Variable or Unknown
+155,Bathycalanus bradyi,C6F,2500,1.5,0.32,1.259,16.78,1.1947,9.934,Ikeda et al. (2006),Variable or Unknown
+156,Bathycalanus bradyi,C6F,2500,1.5,0.32,1.052,10.52,0.9152,4.9865,Ikeda et al. (2006),Variable or Unknown
+157,Spinocalanus magnus,C6F,2500,1.5,0.32,0.232,0.868,0.0606,0.5199,Ikeda et al. (2006),Variable or Unknown
+158,Aetideopsis rostrata,C6F,4000,1.5,0.45,0.35,0.975,0.0713,0.4602,T. Ikeda (unpubl.),Variable or Unknown
+158,Aetideopsis rostrata,C6F,4000,1.5,0.45,0.35,0.975,0.0713,0.4602,T. Ikeda (unpubl.),Variable or Unknown
+159,Amallothrix inornata,C5M,4000,1.5,0.45,0.2,0.471,0.031,0.241,T. Ikeda (unpubl.),Variable or Unknown
+160,Amallothrix inornata,C6F,4000,1.5,0.45,0.22,0.581,0.039,0.288,T. Ikeda (unpubl.),Variable or Unknown
+161,Batheuchaeta lamellata,C5M,4000,1.5,0.45,0.13,0.647,0.0421,0.3856,T. Ikeda (unpubl.),Variable or Unknown
+162,Batheuchaeta lamellata,C6F,4000,1.5,0.45,0.31,1.317,0.1037,0.6873,T. Ikeda (unpubl.),Variable or Unknown
+163,Batheuchaeta lamellata,C6M,4000,1.5,0.45,0.38,0.765,0.0564,0.427,T. Ikeda (unpubl.),Variable or Unknown
+164,Bathycalanus bradyi,C3,4000,1.5,0.45,0.76,1.2,0.123,0.5563,T. Ikeda (unpubl.),Variable or Unknown
+165,Bathycalanus bradyi,C5,4000,1.5,0.45,2.14,8.686,0.5446,5.0952,T. Ikeda (unpubl.),Variable or Unknown
+166,Benthomisophria palliata,C6M,4000,1.5,0.45,0.12,0.53,0.0351,0.1972,T. Ikeda (unpubl.),Variable or Unknown
+167,Chiridiella abyssalis,C6F,4000,1.5,0.45,0.17,0.806,0.0542,0.4267,T. Ikeda (unpubl.),Variable or Unknown
+168,Chiridiella pacifica,C6F,4000,1.5,0.45,0.3,1.198,0.0757,0.4732,T. Ikeda (unpubl.),Variable or Unknown
+169,Gaetanus paracurvicornis,C6F,4000,1.5,0.45,0.26,0.685,0.0572,0.3171,T. Ikeda (unpubl.),Variable or Unknown
+170,Gaidius pungens,C6F,4000,1.5,0.45,0.3,0.641,0.0458,0.3365,T. Ikeda (unpubl.),Variable or Unknown
+171,Gaidius robustus,C6F,4000,1.5,0.45,1.23,8.478,0.7393,4.5273,T. Ikeda (unpubl.),Variable or Unknown
+172,Metridia ornata,C5M,4000,1.5,0.45,0.18,0.33,0.0237,0.1158,T. Ikeda (unpubl.),Variable or Unknown
+173,Metridia ornata,C6F,4000,1.5,0.45,0.32,1.666,0.1445,0.7233,T. Ikeda (unpubl.),Variable or Unknown
+174,Metridia ornata,C6M,4000,1.5,0.45,0.35,0.936,0.0823,0.3965,T. Ikeda (unpubl.),Variable or Unknown
+175,Mixtocalanus robustus,C6F,4000,1.5,0.45,0.39,1.06,0.0799,0.572,T. Ikeda (unpubl.),Variable or Unknown
+176,Onchocalanus magnus,C5F,4000,1.5,0.45,0.62,2.014,0.111,1.236,T. Ikeda (unpubl.),Variable or Unknown
+177,Onchocalanus magnus,C6F,4000,1.5,0.45,0.82,1.47,0.1391,0.7575,T. Ikeda (unpubl.),Variable or Unknown
+178,Paraeuchaeta rubra,C4F,4000,1.5,0.45,0.18,0.492,0.0329,0.254,T. Ikeda (unpubl.),Variable or Unknown
+179,Pseudochirella pacifica,C5M,4000,1.5,0.45,0.37,0.948,0.054,0.561,T. Ikeda (unpubl.),Variable or Unknown
+180,Pseudochirella polyspina,C6F,4000,1.5,0.45,0.41,2.23,0.1561,1.1878,T. Ikeda (unpubl.),Variable or Unknown
+181,Scaphocalanus magnus,C6F,4000,1.5,0.45,0.51,1.35,0.1292,0.6761,T. Ikeda (unpubl.),Variable or Unknown
+182,Spinocalanus magnus,C6F,4000,1.5,0.45,0.24,0.358,0.029,0.1622,T. Ikeda (unpubl.),Variable or Unknown
+183,Undeuchaeta incisa,C5M,4000,1.5,0.45,0.53,2.843,0.1746,1.7172,T. Ikeda (unpubl.),Variable or Unknown
+184,Undeuchaeta major,C6F,4000,1.5,0.45,0.49,1.183,0.1355,0.5406,T. Ikeda (unpubl.),Variable or Unknown
+185,Undeuchaeta plumosa,C5F,4000,1.5,0.45,0.16,0.475,0.0418,0.2166,T. Ikeda (unpubl.),Variable or Unknown
+186,Undeuchaeta plumosa,C6F,4000,1.5,0.45,0.31,1.378,0.0908,0.7882,T. Ikeda (unpubl.),Variable or Unknown
+187,Valdiviella imperfecta,C5F,4000,1.5,0.45,0.25,0.894,0.0655,0.4946,T. Ikeda (unpubl.),Variable or Unknown
+188,Xanthocalanus kurilensis,C6F,4000,1.5,0.45,0.18,0.66,0.0479,0.3565,T. Ikeda (unpubl.),Variable or Unknown
+189,Calanus propinquus,,2,-1,1,1.1789,1.0425,0.1301,0.455,Ikeda et al. (2001),Variable or Unknown
+190,Metridia gerlachei,,2,-1.4,1,0.3195,0.2654,0.0304,0.12,Ikeda et al. (2001),Variable or Unknown
+191,Calanoides acutus,C5,2,-0.2,1,0.2108,0.3936,0.0335,0.1934,Ikeda et al. (2001),Variable or Unknown
+192,Calanoides acutus,C4.5,2,-0.6,1,0.1625,0.266,0.0212,0.1208,Ikeda et al. (2001),Variable or Unknown
+193,Calanus finmarchicus,C6F,2,0.1,1,0.3279,0.3865,0.0295,0.2146,Ikeda et al. (2001),Variable or Unknown
+194,Calanus glacialis,C6F,21.2,1.9,1,0.6158,0.4736,0.0503,0.2227,Ikeda et al. (2001),Variable or Unknown
+195,Calanus hyperboreus,C6F,50,1.3,1,1.485,3.95,0.2825,2.3375,Ikeda et al. (2001),Variable or Unknown
+196,Calanus hyperboreus,C5,50,0.9,1,1.0277,1.943,0.1438,1.117,Ikeda et al. (2001),Variable or Unknown
+197,Calanus hyperboreus,C5,50,-0.3,1,1.054,2.677,0.18,1.634,Ikeda et al. (2001),Variable or Unknown
+198,Metridia longa,C6F,50,0.1,1,0.4058,0.353,0.037,0.1675,Ikeda et al. (2001),Variable or Unknown
+199,Rhincalanus gigas,,50,-1.7,1,0.437,1.08,0.1063,0.5033,Ikeda et al. (2001),Variable or Unknown
+200,Neocalanus cristatus,C5,2,6.3,1,1.67,1.5873,0.1333,0.7905,Ikeda et al. (2001),Variable or Unknown
+201,Neocalanus plumchrus,C4,2,5.6,1,0.28,0.2633,0.0208,0.148,Ikeda et al. (2001),Variable or Unknown
+202,Neocalanus plumchrus,C5,2,7.3,1,0.68,0.7852,0.0628,0.4523,Ikeda et al. (2001),Variable or Unknown
+203,Eucalanus bungii,,2,6,1,0.795,1.01,0.099,0.404,Ikeda et al. (2001),Variable or Unknown
+204,Pseudocalanus elongatus,,2,8.6,1,0.0397,0.0116,0.0014,0.0053,Ikeda et al. (2001),Variable or Unknown
+205,Metridia pacifica,,2,8.2,1,0.3822,0.1476,0.0164,0.0654,Ikeda et al. (2001),Variable or Unknown
+206,Acartia longiremis,,2,9.6,1,0.028,0.0081,0.001,0.0035,Ikeda et al. (2001),Variable or Unknown
+207,Tortanus discaudatus,,2,7,1,0.12,0.0569,0.0064,0.025,Ikeda et al. (2001),Variable or Unknown
+208,Metridia pacifica,,2,13,1,0.2737,0.094,0.0113,0.0433,Ikeda et al. (2001),Variable or Unknown
+209,Mesocalanus tenuicornis,,2,15.8,1,0.22,0.0313,0.0038,0.0123,Ikeda et al. (2001),Variable or Unknown
+210,Paracalanus parvus,,2,13.9,1,0.031,0.0038,0.0005,0.0016,Ikeda et al. (2001),Variable or Unknown
+211,Centropages abdominalis,,2,15.9,1,0.0855,0.0167,0.002,0.0067,Ikeda et al. (2001),Variable or Unknown
+212,Pseudodiaptomus marinus,,2,14.3,1,0.0563,0.0142,0.0017,0.0057,Ikeda et al. (2001),Variable or Unknown
+213,Neocalanus plumchrus,,2,15.1,1,0.555,0.294,0.0262,0.1353,Ikeda et al. (2001),Variable or Unknown
+214,Acartia clausi,,2,14.8,1,0.0305,0.0085,0.0011,0.0035,Ikeda et al. (2001),Variable or Unknown
+215,Neocalanus gracilis,,2,19.7,1,1.64,0.5,0.051,0.2335,Ikeda et al. (2001),Variable or Unknown
+216,Centropages brachiatus,,2,17.3,1,0.115,0.0198,0.002,0.0083,Ikeda et al. (2001),Variable or Unknown
+217,Acartia tonsa,,2,22,1,0.0564,0.0072,0.0007,0.003,Ikeda et al. (2001),Variable or Unknown
+218,Undinula vulgaris,,2,23.5,1,0.9663,0.1854,0.0178,0.0771,Ikeda et al. (2001),Variable or Unknown
+219,Euchaeta marina,,2,24,1,1.3375,0.2905,0.028,0.1209,Ikeda et al. (2001),Variable or Unknown
+220,Acartia pacifica,,2,26,1,0.0464,0.0078,0.0008,0.0032,Ikeda et al. (2001),Variable or Unknown
+221,Calanopia elliptica,,2,26,1,0.2803,0.0563,0.0054,0.0234,Ikeda et al. (2001),Variable or Unknown
+222,Tortanus gracilis,,2,26,1,0.1433,0.0235,0.0023,0.0098,Ikeda et al. (2001),Variable or Unknown
+223,Eucalanus subcrassus,,2,24,1,0.655,0.1037,0.01,0.0431,Ikeda et al. (2001),Variable or Unknown
+224,Labidocera acuta,,2,24,1,1.89,0.2334,0.0224,0.0971,Ikeda et al. (2001),Variable or Unknown
+225,Acartia australis,,2,25,1,0.0553,0.0091,0.0009,0.0038,Ikeda et al. (2001),Variable or Unknown
+226,Nannocalanus minor,,2,26.9,1,0.21,0.0401,0.0045,0.017,Ikeda et al. (2001),Variable or Unknown
+227,Undinula vulgaris,,2,27.6,1,1.3989,0.1673,0.0181,0.0698,Ikeda et al. (2001),Variable or Unknown
+228,Eucalanus attenuatus,,2,27.4,1,0.905,0.1374,0.0128,0.0541,Ikeda et al. (2001),Variable or Unknown
+229,Labidocera acuta,,2,28.5,1,2.07,0.2315,0.0283,0.0998,Ikeda et al. (2001),Variable or Unknown
+230,Labidocera nerii,,2,26.4,1,1.515,0.221,0.027,0.0953,Ikeda et al. (2001),Variable or Unknown
+231,Pontella danae,,2,26.4,1,3.43,0.7,0.084,0.2996,Ikeda et al. (2001),Variable or Unknown
+232,Neocalanus cristatus,C5,25,5,1,1,1.72,0.1651,0.676,Ikeda et al. (2004),Variable or Unknown
+233,Calanus marshallae,C5,15,8,1,0.3829,0.4211,0.0356,0.239,F. Sano & T. Ikeda (unpubl.),North Pacific
+234,Neocalanus plumchrus,C5,75,5.8,1,0.251,0.244,0.0187,0.1113,F. Sano & T. Ikeda (unpubl.),North Pacific
+235,Neocalanus plumchrus,C5,15,8,1,0.6478,0.9278,0.0696,0.5511,F. Sano & T. Ikeda (unpubl.),North Pacific
+236,Mesocalanus tennuicornis,C6F,15,22,1,0.5993,0.265,0.0281,0.1226,F. Sano & T. Ikeda (unpubl.),North Pacific
+237,Metridia pacifica,C6F,135,4.7,1,0.3975,0.2032,0.0245,0.0946,F. Sano & T. Ikeda (unpubl.),North Pacific
+238,Metridia pacifica,C6F,75,5.8,1,0.2775,0.183,0.0215,0.0824,F. Sano & T. Ikeda (unpubl.),North Pacific
+239,Pleuromamma scutullata,C6F,75,6,1,0.4335,0.3223,0.0352,0.1464,F. Sano & T. Ikeda (unpubl.),North Pacific
+240,Pleuromamma scutullata,C6F,75,5.8,1,0.423,0.4025,0.0432,0.1962,F. Sano & T. Ikeda (unpubl.),North Pacific
+241,Pleuromamma scutullata,C6F,100,3,1,0.336,0.3588,0.0358,0.1799,F. Sano & T. Ikeda (unpubl.),North Pacific
+242,Pleuromamma abdominaris,C6F,100,13.6,1,0.6835,0.3585,0.0427,0.1545,F. Sano & T. Ikeda (unpubl.),North Pacific
+243,Pleuromamma xiphias,C6F,100,12,1,0.5488,0.3873,0.0445,0.1599,F. Sano & T. Ikeda (unpubl.),North Pacific
+244,Gaetanus simplex,C6F,75,6,1,0.3635,0.4508,0.0524,0.2176,F. Sano & T. Ikeda (unpubl.),North Pacific
+245,Gaetanus simplex,C6F,100,3,1,0.2723,0.4343,0.0477,0.2295,F. Sano & T. Ikeda (unpubl.),North Pacific
+246,Euchaeta marina,C6F,100,11.3,1,0.6028,0.415,0.044,0.205,F. Sano & T. Ikeda (unpubl.),North Pacific
+247,Euchaeta marina,C6F,15,20.2,1,0.743,0.18,0.0196,0.0862,F. Sano & T. Ikeda (unpubl.),North Pacific
+248,Euchaeta marina,C6F,100,20,1,0.9085,0.23,0.0281,0.104,F. Sano & T. Ikeda (unpubl.),North Pacific
+249,Euchaeta marina,C6F,100,16,1,0.9036,0.335,0.0409,0.1514,F. Sano & T. Ikeda (unpubl.),North Pacific
+250,Candacia bipinnata,C6F,100,11.3,1,0.7088,0.3325,0.0371,0.1438,F. Sano & T. Ikeda (unpubl.),North Pacific
+251,Candacia bipinnata,C6F,15,20.2,1,0.4763,0.1017,0.0117,0.0444,F. Sano & T. Ikeda (unpubl.),North Pacific
+252,Candacia bipinnata,C6F,100,13,1,0.4041,0.1636,0.0193,0.07,F. Sano & T. Ikeda (unpubl.),North Pacific
+253,Candacia columbiae,C6F,100,4.7,1,0.7603,0.5589,0.066,0.2541,F. Sano & T. Ikeda (unpubl.),North Pacific

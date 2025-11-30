@@ -118,22 +118,22 @@ EnvironmentState <- c(R = "GENERALODE")
 #
 # Define a vector called 'DefaultParameters' with a length equal to the number of
 # parameters in the model. Each element of this vector should be given the default
-# for the particualr parameter. If the members of the vector 'DefaultParameters' are
+# for the particular parameter. If the members of the vector 'DefaultParameters' are
 # given names, these names can be used conveniently in the functions below that define
 # the life history processes.
 
 
-DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per capita growth rate
+DefaultParameters <- c(Delta = 1, #turnover rate is 1 divided by the per capita growth rate
                        # Turnover is 1, #per day.  Range of between approximately .1 and 3 from Marañón et al. 2014.  They found no relationship between phytoplankton turnover rate and temperature  
-                       Rmax = 500, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
+                       Rmax = 12000, #Rmax is a density micrograms of carbon per liter.  This means all other densities including copepod densities are micrograms per liter. Approximately 2000 from Putland and Iverson 2007
                        
                        A_hat = 0.096, #0.096 liters per day filtering rate AKA volume swept clear via frost 1972. Units should be liters per day.
                        # Neocalanus plumchrus is close in size to C. marshallae at 567 µg.  Dagg and Wyman (1983) found a range of clearance rates between .0336 1.3344 L/day
-                       
+                       H = 50, #Half saturation constant ug/L AKA mg/m^3; Resource concentration producing 50% of Imax
                        
                        Temp = 273.15,  #20 C is 293.15 K 
                        E_mu = .57,  #.57 eV (McCoy et al. 2008) 
-                       E_M = .55, #55, #.55 (Maps et al. 2014)
+                       E_M = .55, #.55 (Maps et al. 2014): A different Maps et al. 2014 publication (referencing a parameter value from Tande 1988) puts this at 0.40 for C. glacialis though.... ("A generalized approach for simulating growth and development in diverse marine copepod species")
                        E_I = .46, #.46 for C. glacialis (Maps et al. 2012).  Ingestion Activation Energy, see if I can find another one for activity or attack rates
                        #Average of .6 Savage et al. 2004, as cited in (Crossier 1926; Raven and Geider 1988; Vetter 1995; Gillooly et al. 2001)
                        E_Delta = 0.5, #average activation energy of phytoplankton growth from Barton and Yvon-Durocher (2019) 
@@ -144,7 +144,7 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        t0 = 285.65, #Frost experiment on attack rate conducted at 12.5 C or 285.65 K
                        sigma = 0.7, #(de Roos et al. 2007; Peters 1983; Yodzis and Innes 1992)
                        
-                       Mopt = 178, #exp(-3.18)*exp(.73*12), #???????????
+                       Mopt = 150, #exp(-3.18)*exp(.73*12), #???????????
                        
                        epsi1 = 1.089234, #Approximated from saiz and calbert 2007 On marine calanoid species. 15 C.
                        epsi2 = 0.76662, #Approximated from saiz and calbert 2007.  micrograms of carbon per day.  On marine calanoid species. 15 C.
@@ -160,9 +160,9 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        phi2 = -0.092, #For mortality rate per day.  Approximated from  Hirst and Kiørboe 2002 calculated at 15 C. Dry Weight.  
                        t0_phi = 288.15,
                        
-                       rho1 = 0.02310296, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
-                       rho2 = 0.75816, #micro grams per day, from Ikeda_2007.  Dry weight at 2 C
-                       t0_rho = 275.15,
+                       rho1 = 0.0597287, #micro grams per day, from Ikeda_2007.  Dry weight at 1.5 C
+                       rho2 = 0.73020, #micro grams per day, from Ikeda_2007.  Dry weight at 1.5 C
+                       t0_rho = 274.65,
                        
                        mh = .75, # .75 ug (micrograms) (Petersen, 1986) -graph pg 68
                        mj = exp(-3.18)*exp(.73*12),   # ug (micrograms) (Petersen, 1986) pg 66
@@ -174,7 +174,7 @@ DefaultParameters <- c(Delta = 0.017, #turnover rate is 1 divided by the per cap
                        cI = 0, #Jan assumes a value of 0 in Roach model 
                        cM = 0.0 # Jan tests the Roach model with values of -.02, 0, and .02 
 )
-  
+
 # Function name: StateAtBirth  (required)
 #
 # Specify for all structured populations in the problem all possible values of the individual state
@@ -331,25 +331,23 @@ LifeStageEndings <- function(lifestage, istate, birthstate, BirthStateNr, E, par
 
 
 
-
 LifeHistoryRates <- function(lifestage, istate, birthstate, BirthStateNr, E, pars) {
   with(as.list(c(E, pars, istate)),{
-    n = exp(E_I*(Temp-t0)/((k)*Temp*t0))*(A_hat*((Size/Mopt)*exp(1-Size/Mopt))^(alpha+cI*(Temp-t0)))*R 
     
-  
-    #Here the Imax formulation also depends on Resource density
-    #Imax = exp(E_I*(Temp-t0_epsi)/((k)*Temp*t0_epsi))* epsi1 * Size^(epsi2 + cI*(Temp-t0_epsi)) * R^(epsi3 + cI*(Temp-t0_epsi))
+    #n = exp(E_I*(Temp-t0)/((k)*Temp*t0))*(A_hat*((Size/Mopt)*exp(1-Size/Mopt))^(alpha+cI*(Temp-t0)))*R 
     
     #Here the Imax formulation only depends on mass
     Imax = exp(E_I*(Temp-t0_epsi)/((k)*Temp*t0_epsi))* epsi1 * Size^(epsi2 + cI*(Temp-t0_epsi))
     
-    Ingest = Imax*((n)/(n+Imax)) #Formula from Kiorbe et al 2018
+    
+    #Ingest = Imax*((n)/(n+Imax)) #Formula from Kiorbe et al. 2018
+    
+    Ingest = Imax*(R/(H + R)) #Formula from de Roos et al. 2007
     
     Metabolic_rate = exp(E_M*(Temp-t0_rho)/((k)*Temp*t0_rho))*rho1*Size^(rho2 + cM*(Temp-t0_rho)) #parameters estimated from dry weight. Units of micrograms of O2 per day
 
-    #Should assimilation efficiency be used here (sigma) with carbon? or is it redundant because of the conversion from carbon weight to dry weight??
-    netproduction = sigma*Ingest/.455 - (Metabolic_rate*(.014196/0.0279)) #need to convert ingestion from carbon to micrograms of copepod, and metabolism from oxygen consumed to micrograms of copepod
- 
+    netproduction = sigma*Ingest/0.455 - (Metabolic_rate*(0.014196/0.0279)) #need to convert ingestion from carbon to micrograms of copepod dry weight, and metabolism from oxygen consumed to micrograms of copepod dry weight
+   
     #0.455 is conversion factor from Uye 1982 where COPEPOD dry weight is 45.5% Carbon
        
     #0.014196 is oxycalorific coefficient where 1 ug of O2 = 0.014196 J (Elliot and Davison 1975).
